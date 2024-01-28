@@ -13,7 +13,7 @@ Notre application vise à simplifier les opérations de gestion des stocks dans 
 
 ## Diagramme de cas d'utilisation
 
- ![diagramme de classe](/uml/Capture d'écran 2024-01-28 232715.png)
+ ![diagramme de classe](./uml/Capture d'écran 2024-01-28 232715.png)
 
 
 
