@@ -17,4 +17,5 @@ Notre application vise à simplifier les opérations de gestion des stocks dans 
 
 
 
-## Diagramme de classe
+## Lien FIGMA
+https://www.figma.com/file/RbCGTcIl0SfTTUd0HnhYcP/PharmaStock?type=design&node-id=0-1&mode=design&t=NjPXrG9oew0P2M6F-0
