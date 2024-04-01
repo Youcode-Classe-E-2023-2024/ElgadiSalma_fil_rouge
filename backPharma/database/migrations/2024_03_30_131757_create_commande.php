@@ -23,7 +23,7 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->foreign('medicament_id')->references('id')->on('medicament')->onDelete('cascade');
-            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
+            $table->foreign('pharmacie_id')->references('id')->on('pharmacie')->onDelete('cascade');
             $table->foreign('requested_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
