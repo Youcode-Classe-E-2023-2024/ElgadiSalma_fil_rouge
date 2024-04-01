@@ -17,6 +17,7 @@ class adminSeeder extends Seeder
             'name' => 'Salma ElGadi',
             'email' => 'elgadi.salma0@gmail.com',
             'password' => bcrypt('123'),
+            'photo' => 'a',
             'role_id' => '1',
         ]);
     }
