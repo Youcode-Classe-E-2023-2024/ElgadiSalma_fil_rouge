@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\categoryController;
 use App\Http\Controllers\medicamentController;
 
 /*
@@ -29,7 +30,24 @@ Route::group([
 ], function () {
     Route::get('helloworld', [AuthController::class, 'index']);
     Route::post('logout', [AuthController::class, 'logout']);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CRUD medicament
+    |--------------------------------------------------------------------------
+    */
     Route::post('/medicine', [medicamentController::class, 'addMedicine']);
     Route::put('/medicine/{id}', [medicamentController::class, 'editMedicine']);
     Route::delete('/medicine/{id}', [medicamentController::class, 'deleteMedicine']);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CRUD category
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/category', [categoryController::class, 'addCategory']);
+    Route::put('/category/{id}', [categoryController::class, 'editCategory']);
+    Route::delete('/category/{id}', [categoryController::class, 'deleteCategory']);
 });
