@@ -58,6 +58,8 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::post('/users', [userController::class, 'addUser']);
+    Route::put('/users/{id}', [userController::class, 'editUser']);
+    Route::delete('/users/{id}', [userController::class, 'deleteUser']);
 
 
 
