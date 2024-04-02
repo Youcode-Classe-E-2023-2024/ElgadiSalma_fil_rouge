@@ -14,14 +14,9 @@ class categoryController extends Controller
             'name' => 'required',
         ]);
 
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator)->withInput();
-        // }
-
         $category = Category::create([
             'name' => $request->input('name'),
         ]);
-
         
         return response()->json(['message' => 'category added successfully', 'category' => $category], 201);
     }
@@ -42,7 +37,6 @@ class categoryController extends Controller
         
         $category->save();
 
-        
         return response()->json(['message' => 'category updated successfully', 'category' => $category], 201);
     }
 
