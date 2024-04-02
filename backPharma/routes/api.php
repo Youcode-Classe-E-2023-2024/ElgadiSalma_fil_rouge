@@ -50,4 +50,16 @@ Route::group([
     Route::post('/category', [categoryController::class, 'addCategory']);
     Route::put('/category/{id}', [categoryController::class, 'editCategory']);
     Route::delete('/category/{id}', [categoryController::class, 'deleteCategory']);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CRUD users
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/users', [userController::class, 'addUser']);
+
+
+
+
 });
