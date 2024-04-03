@@ -27,7 +27,7 @@ class userController extends Controller
                 'role_id' => '2',
                 'completed' => false,
             ]);
-        } elseif ($user->role_id == '2') {
+        } elseif ($user->role_id == '2' && $user->completed == true) {
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -35,6 +35,11 @@ class userController extends Controller
                 'password' => bcrypt($request->password),
                 'role_id' => '3',
             ]);
+        }
+        else{
+            return response()->json([
+                "message" => "U don't have the permission to add someone"
+            ], 401);
         }
 
         return response()->json([
