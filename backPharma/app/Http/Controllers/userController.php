@@ -25,6 +25,7 @@ class userController extends Controller
                 'photo' => $request->photo,
                 'password' => bcrypt($request->password),
                 'role_id' => '2',
+                'completed' => false,
             ]);
         } elseif ($user->role_id == '2') {
             User::create([
