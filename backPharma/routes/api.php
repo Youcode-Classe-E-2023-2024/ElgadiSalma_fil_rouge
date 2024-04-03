@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\pharmaController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\medicamentController;
@@ -61,6 +62,14 @@ Route::group([
     Route::put('/users/{id}', [userController::class, 'editUser']);
     Route::delete('/users/{id}', [userController::class, 'deleteUser']);
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | pharma infos
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/pharmaInfos', [pharmaController::class, 'addPharma']);
+    
 
 
 
