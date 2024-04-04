@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pharmacie;
 use App\Models\User;
+use App\Models\Medicine;
+use App\Models\MedicineNumber;
+use App\Models\Pharmacie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,9 +32,22 @@ class pharmaController extends Controller
 
         if ($pharmacie) {
             $editedUser = User::find($user->id);
-            
+
             $editedUser->completed = true;
             $editedUser->save();    
+
+            if($editedUser)
+            {
+                $medicines = Medicine::all();
+                foreach ($medicines as $medicine) {
+                    MedicineNumber::create([
+                        'pharmacie_id' => $pharmacie->id,
+                        'medicament_id' => $medicine->id,
+                        'number' => 0,
+                    ]);
+                }
+                
+            }
 
             return response()->json([
                 "message" => "Pharmacy added successfully"
