@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('number');
             $table->dateTime('dateDepart');
             $table->dateTime('dateArrive');
+            $table->boolean('accepted')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
