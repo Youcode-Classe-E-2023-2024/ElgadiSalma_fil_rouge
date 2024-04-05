@@ -79,7 +79,16 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::post('/commande', [commandeController::class, 'addCommande']);
-    // Route::delete('/users/{id}', [userController::class, 'deleteUser']);
+    Route::delete('/commande/{id}', [commandeController::class, 'deleteCommande']);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | approuve or decline commande
+    |--------------------------------------------------------------------------
+    */
+    Route::put('/commande/{id}', [commandeController::class, 'approuveCommande']);
+    Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
 
 
 
