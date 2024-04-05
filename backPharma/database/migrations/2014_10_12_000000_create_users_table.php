@@ -20,10 +20,12 @@ return new class extends Migration
             $table->string('photo');
             $table->bigInteger('role_id');
             $table->boolean('completed')->default(true);
+            $table->bigInteger('pharmacie_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('role_id')->references('id')->on('role')->onDelete('cascade');
+            $table->foreign('pharmacie_id')->references('id')->on('pharmacie')->onDelete('cascade');
         });
     }
 

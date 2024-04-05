@@ -34,6 +34,7 @@ class userController extends Controller
                 'photo' => $request->photo,
                 'password' => bcrypt($request->password),
                 'role_id' => '3',
+                'pharmacie_id' => $user->pharmacie_id,
             ]);
         }
         else{

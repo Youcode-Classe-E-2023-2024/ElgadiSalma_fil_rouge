@@ -24,6 +24,7 @@ class User extends Authenticatable
         'photo',
         'role_id',
         'completed',
+        'pharmacie_id',
     ];
 
     /**
