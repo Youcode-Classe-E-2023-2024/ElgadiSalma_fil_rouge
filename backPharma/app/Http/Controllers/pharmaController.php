@@ -34,6 +34,7 @@ class pharmaController extends Controller
             $editedUser = User::find($user->id);
 
             $editedUser->completed = true;
+            $editedUser->pharmacie_id = $pharmacie->id;
             $editedUser->save();    
 
             if($editedUser)
