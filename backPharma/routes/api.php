@@ -6,6 +6,7 @@ use App\Http\Controllers\userController;
 use App\Http\Controllers\pharmaController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\commandeController;
 use App\Http\Controllers\medicamentController;
 
 /*
@@ -70,6 +71,15 @@ Route::group([
     */
     Route::post('/pharmaInfos', [pharmaController::class, 'addPharma']);
     
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | CRD commande
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/commande', [commandeController::class, 'addCommande']);
+    // Route::delete('/users/{id}', [userController::class, 'deleteUser']);
 
 
 
