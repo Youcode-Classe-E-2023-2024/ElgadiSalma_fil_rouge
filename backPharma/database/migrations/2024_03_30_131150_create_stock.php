@@ -16,8 +16,6 @@ return new class extends Migration
             $table->bigInteger('medicament_id');
             $table->bigInteger('pharmacie_id');
             $table->bigInteger('number');
-            $table->date('dateFabrication');
-            $table->date('dateExpiration');
             $table->bigInteger('price');
             $table->timestamps();
             $table->softDeletes();

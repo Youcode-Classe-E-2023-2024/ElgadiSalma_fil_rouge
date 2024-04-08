@@ -17,6 +17,7 @@ class Commande extends Model
         'dateArrive',
         'requested_by',
         'accepted',
+        'dateExpiration',
     ];
 
     protected $table = 'commande';
