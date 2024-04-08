@@ -13,6 +13,7 @@ class commandeController extends Controller
         $request->validate([
             'medicament_id' => 'required|integer',
             'number' => 'required|integer',
+            'dateExpiration' => 'required|date|after_or_equal:' . now()->format('d-m-y'),
             'dateDepart' => 'required|date',
             'dateArrive' => 'required|date_format:d-m-y|after_or_equal:dateDepart|after_or_equal:' . now()->format('d-m-y'),
         ]);
@@ -23,6 +24,7 @@ class commandeController extends Controller
             'pharmacie_id' => $user->pharmacie_id,
             'medicament_id' => $request->input('medicament_id'),
             'number' => $request->input('number'),
+            'dateExpiration' => $request->input('dateExpiration'),
             'dateDepart' => $request->input('dateDepart'),
             'dateArrive' => $request->input('dateArrive'),
             'requested_by' =>$user->id,
@@ -52,7 +54,7 @@ class commandeController extends Controller
         $now = \Carbon\Carbon::now();
         $diffInHours = $DateArrive->diffInHours($now);
 
-        if($user->id === '2' && $diffInHours > 24)
+        if($user->id === '2' && $commande->accepted && $diffInHours > 24)
         {
             $commande->delete();
 
@@ -75,7 +77,6 @@ class commandeController extends Controller
 
         if($user->id == '2')
         {
-
             $commande = Commande::findOrFail($id);
 
             $commande->accepted = true;
@@ -98,12 +99,12 @@ class commandeController extends Controller
 
     public function declineCommande($id)
     {
+        $commande = Commande::find($id);
+
         $user = Auth::user();
 
-        if($user->id == '2')
+        if($user->id == '2' && !$commande->accepted)
         {
-
-            $commande = Commande::find($id);
             $commande->delete();
     
             return response()->json([
@@ -115,7 +116,7 @@ class commandeController extends Controller
         else
         {
             return response()->json([
-                "message" => "U don't have the permission to decline commandes"
+                "message" => "Error"
             ], 401);
         }
     }
