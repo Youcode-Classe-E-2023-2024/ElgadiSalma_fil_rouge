@@ -88,7 +88,7 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::put('/commande/{id}', [commandeController::class, 'approuveCommande']);
-    Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
+    // Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
 
 
 

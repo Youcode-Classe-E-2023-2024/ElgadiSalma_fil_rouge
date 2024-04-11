@@ -21,22 +21,28 @@ class medicamentController extends Controller
             'image' =>'required',
         ]);
 
-        // if ($validator->fails()) {
-        //     return back()->withErrors($validator)->withInput();
-        // }
+        $user = Auth::user();
 
-        $medicine = Medicine::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'price' => $request->input('price'),
-            'image' => $request->input('image'),
-            'category_id' => $request->input('category'),
-            'expiration' => $request->input('expiration'),
-            // 'created_by' => $user->id,
-        ]);
+        if ($user->role_id == '1') 
+        {
+            $medicine = Medicine::create([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+                'image' => $request->input('image'),
+                'category_id' => $request->input('category'),
+                'expiration' => $request->input('expiration'),
+                // 'created_by' => $user->id,
+            ]);
 
-        
-        return response()->json(['message' => 'medicine added successfully', 'medicine' => $medicine], 201);
+            
+            return response()->json(['message' => 'medicine added successfully', 'medicine' => $medicine], 201);
+        }
+        else{
+            return response()->json([
+                "message" => "U don't have the permission to add someone"
+            ], 401);
+        }
     }
 
     public function editMedicine(Request $request, $id)

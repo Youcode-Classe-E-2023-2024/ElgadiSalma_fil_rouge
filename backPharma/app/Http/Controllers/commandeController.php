@@ -13,26 +13,54 @@ class commandeController extends Controller
         $request->validate([
             'medicament_id' => 'required|integer',
             'number' => 'required|integer',
-            'dateExpiration' => 'required|date|after_or_equal:' . now()->format('d-m-y'),
-            'dateDepart' => 'required|date',
-            'dateArrive' => 'required|date_format:d-m-y|after_or_equal:dateDepart|after_or_equal:' . now()->format('d-m-y'),
+            'dateExpiration' => 'required|date_format:Y-m-d|after_or_equal:' . now()->format('Y-m-d'),
+            'dateDepart' => 'required|date_format:Y-m-d',
+            'dateArrive' => 'required|date_format:Y-m-d|after_or_equal:dateDepart|after_or_equal:' . now()->format('Y-m-d'),
         ]);
 
         $user = Auth::user();
 
-        Commande::create([
-            'pharmacie_id' => $user->pharmacie_id,
-            'medicament_id' => $request->input('medicament_id'),
-            'number' => $request->input('number'),
-            'dateExpiration' => $request->input('dateExpiration'),
-            'dateDepart' => $request->input('dateDepart'),
-            'dateArrive' => $request->input('dateArrive'),
-            'requested_by' =>$user->id,
-        ]);
+        if ($user->role_id == '3') 
+        {
+            Commande::create([
+                'pharmacie_id' => $user->pharmacie_id,
+                'medicament_id' => $request->input('medicament_id'),
+                'number' => $request->input('number'),
+                'dateExpiration' => $request->input('dateExpiration'),
+                'dateDepart' => $request->input('dateDepart'),
+                'dateArrive' => $request->input('dateArrive'),
+                'requested_by' =>$user->id,
+            ]);
 
-        return response()->json([
-            "message" => "Command added successfully"
-        ], 201);
+            return response()->json([
+                "message" => "Command added successfully"
+            ], 201);
+        
+        }
+
+        elseif($user->role_id == '2'){
+            Commande::create([
+                'pharmacie_id' => $user->pharmacie_id,
+                'medicament_id' => $request->input('medicament_id'),
+                'number' => $request->input('number'),
+                'dateExpiration' => $request->input('dateExpiration'),
+                'dateDepart' => $request->input('dateDepart'),
+                'dateArrive' => $request->input('dateArrive'),
+                'requested_by' =>$user->id,
+                'accepted' => true,
+            ]);
+
+            return response()->json([
+                "message" => "Command added successfully"
+            ], 201);
+        
+        }
+
+        else{
+            return response()->json([
+                "message" => "U don't have the permission to add command"
+            ], 401);
+        }
     }
 
     public function deleteCommande($id)
@@ -41,7 +69,11 @@ class commandeController extends Controller
 
         $commande = Commande::find($id);
 
-        if($user->id === '3' && !$commande->accepted)
+        $DateArrive = \Carbon\Carbon::parse($commande->dateArrive);
+        $now = \Carbon\Carbon::now();
+        $diffInHours = $DateArrive->diffInHours($now);
+
+        if($user->role_id == '3')
         {
             $commande->delete();
 
@@ -50,11 +82,17 @@ class commandeController extends Controller
             ], 201);
         }
 
-        $DateArrive = \Carbon\Carbon::createFromFormat('d-m-y', $commande->dateArrive);
-        $now = \Carbon\Carbon::now();
-        $diffInHours = $DateArrive->diffInHours($now);
+        // decline
+        if($user->role_id === '2' && !$commande->accepted)
+        {
+            $commande->delete();
 
-        if($user->id === '2' && $commande->accepted && $diffInHours > 24)
+            return response()->json([
+                "message" => "Command deleted successfully"
+            ], 201);
+        }
+
+        if($user->role_id == '2' && $commande->accepted && $diffInHours > 24)
         {
             $commande->delete();
 
@@ -97,27 +135,27 @@ class commandeController extends Controller
         }
     }
 
-    public function declineCommande($id)
-    {
-        $commande = Commande::find($id);
+    // public function declineCommande($id)
+    // {
+    //     $commande = Commande::find($id);
 
-        $user = Auth::user();
+    //     $user = Auth::user();
 
-        if($user->id == '2' && !$commande->accepted)
-        {
-            $commande->delete();
+    //     if($user->id == '2' && !$commande->accepted)
+    //     {
+    //         $commande->delete();
     
-            return response()->json([
-                "message" => "Command deleted successfully"
-            ], 201);
+    //         return response()->json([
+    //             "message" => "Command deleted successfully"
+    //         ], 201);
     
-        }
+    //     }
 
-        else
-        {
-            return response()->json([
-                "message" => "Error"
-            ], 401);
-        }
-    }
+    //     else
+    //     {
+    //         return response()->json([
+    //             "message" => "Error"
+    //         ], 401);
+    //     }
+    // }
 }
