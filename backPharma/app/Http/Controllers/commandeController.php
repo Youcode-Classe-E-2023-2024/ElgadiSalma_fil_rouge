@@ -73,7 +73,7 @@ class commandeController extends Controller
         $now = \Carbon\Carbon::now();
         $diffInHours = $DateArrive->diffInHours($now);
 
-        if($user->role_id == '3')
+        if($user->role_id == '3' && !$commande->accepted)
         {
             $commande->delete();
 
@@ -83,7 +83,7 @@ class commandeController extends Controller
         }
 
         // decline
-        if($user->role_id === '2' && !$commande->accepted)
+        if($user->role_id == '2' && !$commande->accepted)
         {
             $commande->delete();
 
@@ -122,7 +122,7 @@ class commandeController extends Controller
             $commande->save();
     
             return response()->json([
-                "message" => "Command deleted successfully"
+                "message" => "Command approuved successfully"
             ], 201);
     
         }
