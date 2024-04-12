@@ -10,14 +10,14 @@ class Commande extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pharmacie_id',
         'medicament_id',
+        'pharmacie_id',
+        'requested_by',
         'number',
         'dateDepart',
         'dateArrive',
-        'requested_by',
-        'accepted',
         'dateExpiration',
+        'accepted',
     ];
 
     protected $table = 'commande';
