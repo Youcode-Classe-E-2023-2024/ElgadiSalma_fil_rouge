@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Models\Stock;
+use App\Models\Commande;
+use App\Models\Medicine;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,6 +16,21 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $pendingCommands = Commande::where('dateArrive', '<=', now())->where('accepted', true)->get();
+
+            foreach ($pendingCommands as $commande) {
+                $medicine = Medicine::find($commande->medicament_id);
+                $prixTotal = $medicine->price * $commande->number;
+    
+                Stock::create([
+                    'medicament_id' => $commande->medicament_id,
+                    'pharmacie_id' => $commande->pharmacie_id,
+                    'number' => $commande->number,
+                    'price' => $prixTotal,
+                ]);
+    
+            }})->everyMinute();
     }
 
     /**
