@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stock;
 use App\Models\Commande;
+use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,7 +24,7 @@ class commandeController extends Controller
 
         if ($user->role_id == '3') 
         {
-            Commande::create([
+            $commande = Commande::create([
                 'pharmacie_id' => $user->pharmacie_id,
                 'medicament_id' => $request->input('medicament_id'),
                 'number' => $request->input('number'),
@@ -39,7 +41,7 @@ class commandeController extends Controller
         }
 
         elseif($user->role_id == '2'){
-            Commande::create([
+            $commande = Commande::create([
                 'pharmacie_id' => $user->pharmacie_id,
                 'medicament_id' => $request->input('medicament_id'),
                 'number' => $request->input('number'),
@@ -135,27 +137,23 @@ class commandeController extends Controller
         }
     }
 
-    // public function declineCommande($id)
+    // public function insertToStock()
     // {
-    //     $commande = Commande::find($id);
+    //     $pendingCommands = Commande::where('dateArrive', '<=', now())->where('accepted', true)->get();
 
-    //     $user = Auth::user();
+    //     foreach ($pendingCommands as $commande) {
+    //         $medicine = Medicine::find($commande->medicament_id);
+    //         $prixTotal = $medicine->price * $commande->number;
 
-    //     if($user->id == '2' && !$commande->accepted)
-    //     {
-    //         $commande->delete();
-    
-    //         return response()->json([
-    //             "message" => "Command deleted successfully"
-    //         ], 201);
-    
-    //     }
+    //         Stock::create([
+    //             'medicament_id' => $commande->medicament_id,
+    //             'pharmacie_id' => $commande->pharmacie_id,
+    //             'number' => $commande->number,
+    //             'price' => $prixTotal,
+    //         ]);
 
-    //     else
-    //     {
-    //         return response()->json([
-    //             "message" => "Error"
-    //         ], 401);
+    //         // Vous pouvez marquer la commande comme traitée ici si nécessaire
     //     }
     // }
+
 }

@@ -10,12 +10,11 @@ class Stock extends Model
     use HasFactory;
     
     protected $fillable = [
-        'name',
-        'logo',
-        'city_id',
-        'adresse',
-        'created_by',
+        'medicament_id',
+        'pharmacie_id',
+        'number',
+        'price',
     ];
 
-    protected $table = 'pharmacie';
+    protected $table = 'stock';
 }
