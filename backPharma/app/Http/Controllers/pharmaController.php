@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Capitale;
 use App\Models\Medicine;
-use App\Models\MedicineNumber;
 use App\Models\Pharmacie;
 use Illuminate\Http\Request;
+use App\Models\MedicineNumber;
 use Illuminate\Support\Facades\Auth;
 
 class pharmaController extends Controller
@@ -16,6 +17,7 @@ class pharmaController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'logo' => 'required',
+            'capitale' => 'required',
             'city_id' => 'required|integer',
             'adresse' => 'required|string|max:155',
         ]);
@@ -39,15 +41,23 @@ class pharmaController extends Controller
 
             if($editedUser)
             {
-                $medicines = Medicine::all();
-                foreach ($medicines as $medicine) {
-                    MedicineNumber::create([
-                        'pharmacie_id' => $pharmacie->id,
-                        'medicament_id' => $medicine->id,
-                        'number' => 0,
-                    ]);
+                $capitale = Capitale::create([
+                    'number' => $request->capitale,
+                    'pharmacie_id' => $pharmacie->id,
+                ]);
+
+                if($capitale)
+                {
+                    $medicines = Medicine::all();
+                    foreach ($medicines as $medicine) {
+                        MedicineNumber::create([
+                            'pharmacie_id' => $pharmacie->id,
+                            'medicament_id' => $medicine->id,
+                            'number' => 0,
+                        ]);
+                    }
+                    
                 }
-                
             }
 
             return response()->json([
