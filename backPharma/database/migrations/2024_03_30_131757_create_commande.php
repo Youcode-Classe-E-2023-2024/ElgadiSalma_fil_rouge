@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('dateArrive');
             $table->date('dateExpiration');
             $table->boolean('accepted')->default(false);
+            $table->boolean('addedToStock')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
