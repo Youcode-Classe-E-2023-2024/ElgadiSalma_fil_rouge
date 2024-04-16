@@ -8,7 +8,7 @@ use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class commandeController extends Controller
+class CommandeController extends Controller
 {
     public function addCommande(Request $request)
     {
@@ -34,10 +34,7 @@ class commandeController extends Controller
                 'requested_by' =>$user->id,
             ]);
 
-            return response()->json([
-                "message" => "Command added successfully"
-            ], 201);
-        
+            return redirect()->back()->with('success', "Commande ajoutée avec succès");
         }
 
         elseif($user->role_id == '2'){
@@ -52,16 +49,11 @@ class commandeController extends Controller
                 'accepted' => true,
             ]);
 
-            return response()->json([
-                "message" => "Command added successfully"
-            ], 201);
-        
+            return redirect()->back()->with('success', "Commande ajoutée avec succès");
         }
 
         else{
-            return response()->json([
-                "message" => "U don't have the permission to add command"
-            ], 401);
+            return redirect()->back()->with('error', "Vous n'avez pas la permission d'ajouter une commande");
         }
     }
 
@@ -79,35 +71,26 @@ class commandeController extends Controller
         {
             $commande->delete();
 
-            return response()->json([
-                "message" => "Command deleted successfully"
-            ], 201);
+            return redirect()->back()->with('success', "Commande supprimée avec succès");
         }
 
-        // decline
         if($user->role_id == '2' && !$commande->accepted)
         {
             $commande->delete();
 
-            return response()->json([
-                "message" => "Command deleted successfully"
-            ], 201);
+            return redirect()->back()->with('success', "Commande supprimée avec succès");
         }
 
         if($user->role_id == '2' && $commande->accepted && $diffInHours > 24)
         {
             $commande->delete();
 
-            return response()->json([
-                "message" => "Command deleted successfully"
-            ], 201);
+            return redirect()->back()->with('success', "Commande supprimée avec succès");
         }
 
         else
         {
-            return response()->json([
-                "message" => "U can't delete this command"
-            ], 401);
+            return redirect()->back()->with('error', "Vous ne pouvez pas supprimer cette commande");
         }
     }
 
@@ -123,37 +106,12 @@ class commandeController extends Controller
             
             $commande->save();
     
-            return response()->json([
-                "message" => "Command approuved successfully"
-            ], 201);
-    
+            return redirect()->back()->with('success', "Commande approuvée avec succès");
         }
 
         else
         {
-            return response()->json([
-                "message" => "U don't have the permission to approuve commandes"
-            ], 401);
+            return redirect()->back()->with('error', "Vous n'avez pas la permission d'approuver des commandes");
         }
     }
-
-    // public function insertToStock()
-    // {
-    //     $pendingCommands = Commande::where('dateArrive', '<=', now())->where('accepted', true)->get();
-
-    //     foreach ($pendingCommands as $commande) {
-    //         $medicine = Medicine::find($commande->medicament_id);
-    //         $prixTotal = $medicine->price * $commande->number;
-
-    //         Stock::create([
-    //             'medicament_id' => $commande->medicament_id,
-    //             'pharmacie_id' => $commande->pharmacie_id,
-    //             'number' => $commande->number,
-    //             'price' => $prixTotal,
-    //         ]);
-
-    //         // Vous pouvez marquer la commande comme traitée ici si nécessaire
-    //     }
-    // }
-
 }

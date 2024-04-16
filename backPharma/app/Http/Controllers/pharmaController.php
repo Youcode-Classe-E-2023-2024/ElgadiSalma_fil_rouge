@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\MedicineNumber;
 use Illuminate\Support\Facades\Auth;
 
-class pharmaController extends Controller
+class PharmaController extends Controller
 {
     public function addPharma(Request $request)
     {
@@ -60,16 +60,9 @@ class pharmaController extends Controller
                 }
             }
 
-            return response()->json([
-                "message" => "Pharmacy added successfully"
-            ], 201);
+            return redirect()->back()->with('success', "Pharmacie ajoutée avec succès");
         } else {
-            return response()->json([
-                "message" => "Failed to add pharmacy"
-            ], 500);
+            return redirect()->back()->with('error', "Échec de l'ajout de la pharmacie");
         }
     }
-
-
-
 }

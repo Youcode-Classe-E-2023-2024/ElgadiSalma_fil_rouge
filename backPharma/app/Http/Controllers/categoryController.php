@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
-
-class categoryController extends Controller
+class CategoryController extends Controller
 {
     public function addCategory(Request $request)
     {
@@ -18,7 +17,7 @@ class categoryController extends Controller
             'name' => $request->input('name'),
         ]);
         
-        return response()->json(['message' => 'category added successfully', 'category' => $category], 201);
+        return redirect()->back()->with('success', "Catégorie ajoutée avec succès");
     }
 
     public function editCategory(Request $request, $id)
@@ -30,14 +29,14 @@ class categoryController extends Controller
         ]);
 
         if (!$category) {
-            return response()->json(['message' => 'category not found'], 404);
+            return redirect()->back()->with('error', "Catégorie non trouvée");
         }
 
         $category-> name = $request->input('name');
         
         $category->save();
 
-        return response()->json(['message' => 'category updated successfully', 'category' => $category], 201);
+        return redirect()->back()->with('success', "Catégorie mise à jour avec succès");
     }
 
     public function deleteCategory($id)
@@ -46,8 +45,8 @@ class categoryController extends Controller
         $category->delete();
 
         if (!$category) {
-            return response()->json(['message' => 'category not found'], 404);
+            return redirect()->back()->with('error', "Catégorie non trouvée");
         }
-        return response()->json(['message' => 'category deleted successfully'], 200);
+        return redirect()->back()->with('success', "Catégorie supprimée avec succès");
     }
 }

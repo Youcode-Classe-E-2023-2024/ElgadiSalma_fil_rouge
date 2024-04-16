@@ -8,7 +8,7 @@ use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class venteController extends Controller
+class VenteController extends Controller
 {
     public function buyMedicine(Request $request, $id)
     {
@@ -18,8 +18,8 @@ class venteController extends Controller
     
         $user = Auth::user();
     
-        if ($user->role_id = '1') {
-            return response()->json(['message' => 'You dont have the permission to do this action'], 401);
+        if ($user->role_id == '1') {
+            return redirect()->back()->with('error', "Vous n'avez pas la permission d'effectuer cette action");
         } else {
             $editedStock = Stock::where('pharmacie_id', $user->pharmacie_id)
                                 ->where('medicament_id', $id)
@@ -29,7 +29,7 @@ class venteController extends Controller
                 $editedStock->number -= $number;
                 $editedStock->save();
 
-                if($editedStock->number =0)
+                if($editedStock->number == 0)
                 {
                     $editedStock->finished = true;
                     $editedStock->save();
@@ -45,16 +45,15 @@ class venteController extends Controller
                     $editedCapital->save();
                 }
     
-                return response()->json(['message' => 'Medicine bought successfully', 'prixTotal' => $prixTotal], 200);
+                return redirect()->back()->with('success', "Médicament acheté avec succès. Prix total : $prixTotal");
             } 
-            elseif($editedStock->number =0)
+            elseif($editedStock->number == 0)
             {
                 $editedStock->finished = true;
                 $editedStock->save();
             }
             else {
-
-                return response()->json(['message' => 'Not enough stock available'], 401);
+                return redirect()->back()->with('error', "Stock insuffisant");
             }
         }
     }
