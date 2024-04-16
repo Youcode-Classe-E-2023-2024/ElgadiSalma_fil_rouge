@@ -26,24 +26,31 @@
                     d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z">
                 </path>
             </svg>
-        </button>   </a> 
+        </button>   
+    </a> 
 
     <div class="ring">
         <i style="--clr:#15616D;"></i>
         <i style="--clr:#8AA79F;"></i>
         <i style="--clr:#C5CAB8;"></i>
         <div class="login">
-            <h2>Forgot Password</h2>
+            <h2 style="font-weight:bolder">Forgot Password</h2>
             <h3 style="text-align: center">we will send an email to reset your password</h3>
-            <div class="inputBx">
-                <div class="inputGroup">
-                    <input autocomplete="off" name="email" required="" type="email">
-                    <label for="email">Email</label>
+            <form action="{{ route('forgotPassword') }}" method="POST">
+                @csrf
+                <div class="inputBx">
+                    @error('email')
+                        <span style="color: red; padding-left :10px">{{ $message }}</span>
+                    @enderror
+                    <div class="inputGroup">
+                        <input autocomplete="off" name="email" required="" type="email">
+                        <label for="email">Email</label>
+                    </div>
                 </div>
-            </div>
-            <div class="inputBx">
-                <input type="submit" value="reset">
-            </div>
+                <div class="inputBx">
+                    <input type="submit" value="reset">
+                </div>
+            </form>
             <div class="links">
             </div>
         </div>
