@@ -12,8 +12,10 @@ class Stock extends Model
     protected $fillable = [
         'medicament_id',
         'pharmacie_id',
+        'initialNumber',
         'number',
         'price',
+        'finished',
     ];
 
     protected $table = 'stock';

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('medicament_id');
             $table->bigInteger('pharmacie_id');
+            $table->bigInteger('initialNumber');
             $table->bigInteger('number');
+            $table->boolean('finished')->default(false);
             $table->bigInteger('price');
             $table->timestamps();
             $table->softDeletes();
