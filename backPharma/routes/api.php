@@ -10,96 +10,96 @@ use App\Http\Controllers\categoryController;
 use App\Http\Controllers\commandeController;
 use App\Http\Controllers\medicamentController;
 
-/*
-|--------------------------------------------------------------------------
-| Authentification
-|--------------------------------------------------------------------------
-*/
+// /*
+// |--------------------------------------------------------------------------
+// | Authentification
+// |--------------------------------------------------------------------------
+// */
 
-Route::post('login', [AuthController::class, 'login']);
+// Route::post('login', [AuthController::class, 'login']);
 
-/*
-|--------------------------------------------------------------------------
-| Forgot-password
-|--------------------------------------------------------------------------
-*/
-Route::post('/forgotPassword', [AuthController::class, 'forgotPassword']);
-Route::get('/reset/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
-Route::post('/resetPassword', [AuthController::class, 'reset']);
-
-
-Route::group([
-    'middleware' => 'auth:api'
-], function () {
-    Route::get('helloworld', [AuthController::class, 'index']);
-    Route::post('logout', [AuthController::class, 'logout']);
+// /*
+// |--------------------------------------------------------------------------
+// | Forgot-password
+// |--------------------------------------------------------------------------
+// */
+// Route::post('/forgotPassword', [AuthController::class, 'forgotPassword']);
+// Route::get('/reset/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+// Route::post('/resetPassword', [AuthController::class, 'reset']);
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | CRUD medicament
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/medicine', [medicamentController::class, 'addMedicine']);
-    Route::put('/medicine/{id}', [medicamentController::class, 'editMedicine']);
-    Route::delete('/medicine/{id}', [medicamentController::class, 'deleteMedicine']);
+// Route::group([
+//     'middleware' => 'auth:api'
+// ], function () {
+//     Route::get('helloworld', [AuthController::class, 'index']);
+//     Route::post('logout', [AuthController::class, 'logout']);
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | CRUD category
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/category', [categoryController::class, 'addCategory']);
-    Route::put('/category/{id}', [categoryController::class, 'editCategory']);
-    Route::delete('/category/{id}', [categoryController::class, 'deleteCategory']);
+//     /*
+//     |--------------------------------------------------------------------------
+//     | CRUD medicament
+//     |--------------------------------------------------------------------------
+//     */
+//     Route::post('/medicine', [medicamentController::class, 'addMedicine']);
+//     Route::put('/medicine/{id}', [medicamentController::class, 'editMedicine']);
+//     Route::delete('/medicine/{id}', [medicamentController::class, 'deleteMedicine']);
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | CRUD users
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/users', [userController::class, 'addUser']);
-    Route::put('/users/{id}', [userController::class, 'editUser']);
-    Route::delete('/users/{id}', [userController::class, 'deleteUser']);
+//     /*
+//     |--------------------------------------------------------------------------
+//     | CRUD category
+//     |--------------------------------------------------------------------------
+//     */
+//     Route::post('/category', [categoryController::class, 'addCategory']);
+//     Route::put('/category/{id}', [categoryController::class, 'editCategory']);
+//     Route::delete('/category/{id}', [categoryController::class, 'deleteCategory']);
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | pharma infos
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/pharmaInfos', [pharmaController::class, 'addPharma']);
+//     /*
+//     |--------------------------------------------------------------------------
+//     | CRUD users
+//     |--------------------------------------------------------------------------
+//     */
+//     Route::post('/users', [userController::class, 'addUser']);
+//     Route::put('/users/{id}', [userController::class, 'editUser']);
+//     Route::delete('/users/{id}', [userController::class, 'deleteUser']);
+
+
+//     /*
+//     |--------------------------------------------------------------------------
+//     | pharma infos
+//     |--------------------------------------------------------------------------
+//     */
+//     Route::post('/pharmaInfos', [pharmaController::class, 'addPharma']);
     
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | CRD commande
-    |--------------------------------------------------------------------------
-    */
-    Route::post('/commande', [commandeController::class, 'addCommande']);
-    Route::delete('/commande/{id}', [commandeController::class, 'deleteCommande']);
+//     /*
+//     |--------------------------------------------------------------------------
+//     | CRD commande
+//     |--------------------------------------------------------------------------
+//     */
+//     Route::post('/commande', [commandeController::class, 'addCommande']);
+//     Route::delete('/commande/{id}', [commandeController::class, 'deleteCommande']);
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | approuve or decline commande
-    |--------------------------------------------------------------------------
-    */
-    Route::put('/commande/{id}', [commandeController::class, 'approuveCommande']);
-    // Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
+//     /*
+//     |--------------------------------------------------------------------------
+//     | approuve or decline commande
+//     |--------------------------------------------------------------------------
+//     */
+//     Route::put('/commande/{id}', [commandeController::class, 'approuveCommande']);
+//     // Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | buy medicine
-    |--------------------------------------------------------------------------
-    */
-    Route::put('/buyMedicine/{id}', [venteController::class, 'buyMedicine']);
-    // Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
+//     /*
+//     |--------------------------------------------------------------------------
+//     | buy medicine
+//     |--------------------------------------------------------------------------
+//     */
+//     Route::put('/buyMedicine/{id}', [venteController::class, 'buyMedicine']);
+//     // Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
 
 
 
-});
+// });
