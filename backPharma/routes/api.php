@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\venteController;
 use App\Http\Controllers\pharmaController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\categoryController;
@@ -88,6 +89,15 @@ Route::group([
     |--------------------------------------------------------------------------
     */
     Route::put('/commande/{id}', [commandeController::class, 'approuveCommande']);
+    // Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | buy medicine
+    |--------------------------------------------------------------------------
+    */
+    Route::put('/buyMedicine/{id}', [venteController::class, 'buyMedicine']);
     // Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
 
 
