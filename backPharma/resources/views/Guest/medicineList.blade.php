@@ -37,82 +37,20 @@
                   </div>
                </div>
                <div class="row">
+                  @foreach ($medicines as $medicine)
                   <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                       <div class="department_gd_inner">
                          <div class="image">
                             <img src="assets/image/departments/department-1.jpg" class="img-fluid" alt="img" />
                          </div>
                          <div class="dp_content">
-                            <h2><a href="#">Psychiatry</a></h2>
-                            <p>In its ongoing attempts to define, 
-                                  understand, and categorize disorders...</p>
+                            <h2><a href="#">{{$medicine->name}}</a></h2>
+                            <p>{{$medicine->price}} DH</p>
                             <a href="#"  class="read_" >Read more</a>
                          </div>
                       </div>
                   </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                      <div class="department_gd_inner">
-                         <div class="image">
-                            <img src="assets/image/departments/department-2.jpg" class="img-fluid" alt="img" />
-                         </div>
-                         <div class="dp_content">
-                            <h2><a href="#">Ophthalmology</a></h2>
-                            <p>Our mission is to improve quality of life through the enhancement...
-                             </p>
-                            <a href="#"  class="read_">Read more</a>
-                         </div>
-                      </div>
-                  </div>
-                  
-                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                      <div class="department_gd_inner">
-                         <div class="image">
-                            <img src="assets/image/departments/department-3.jpg" class="img-fluid" alt="img" />
-                         </div>
-                         <div class="dp_content">
-                            <h2><a href="#">Cardiology</a></h2>
-                            <p>​Our areas of expertise make the depart- ment a national cardiac referral centre...</p>
-                            <a href="#" class="read_">Read more</a>
-                         </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                      <div class="department_gd_inner">
-                         <div class="image">
-                            <img src="assets/image/departments/department-4.jpg" class="img-fluid" alt="img" />
-                         </div>
-                         <div class="dp_content">
-                            <h2><a href="#">Immunology</a></h2>
-                            <p>The immune system provides the defense for an organism to repel invasion...</p>
-                            <a href="#" class="read_">Read more</a>
-                         </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                      <div class="department_gd_inner">
-                         <div class="image">
-                            <img src="assets/image/departments/department-5.jpg" class="img-fluid" alt="img" />
-                         </div>
-                         <div class="dp_content">
-                            <h2><a href="#">Hematology</a></h2>
-                            <p>With nationally and internationally known experts in gastroenterology...</p>
-                            <a href="#"  class="read_">Read more</a>
-                         </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                      <div class="department_gd_inner">
-                         <div class="image">
-                            <img src="assets/image/departments/department-6.jpg" class="img-fluid" alt="img" />
-                         </div>
-                         <div class="dp_content">
-                            <h2><a href="#">Gastroenterology</a></h2>
-                            <p>We have a diverse team of clinicians, 
-                                  administrators, and researchers...</p>
-                            <a href="#"  class="read_">Read more</a>
-                         </div>
-                      </div>
-                  </div>
+                  @endforeach
                </div>
             </div>
          </div>

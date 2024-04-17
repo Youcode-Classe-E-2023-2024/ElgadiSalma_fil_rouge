@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\venteController;
+use App\Http\Controllers\viewsController;
 use App\Http\Controllers\pharmaController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\commandeController;
@@ -24,9 +25,7 @@ Route::get('/', function () {
     return view('Guest.homePage');
 })->name('homePage');
 
-Route::get('/medicament', function () {
-    return view('Guest.medicineList');
-})->name('medicineList');
+Route::get('/medicament', [viewsController::class, 'medicineList'])->name('medicineList');
 
 Route::get('/about-us', function () {
     return view('Guest.about-us');
@@ -39,10 +38,6 @@ Route::get('/login', function () {
 Route::get('/forgot-password', function () {
     return view('Authentification.forgot-password');
 })->name('forgot-password');
-
-// Route::get('/reset-password/{token}', function () {
-//     return view('Authentification.reset-password');
-// })->name('reset-password');
 
 /*
 |--------------------------------------------------------------------------
