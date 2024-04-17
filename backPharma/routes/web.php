@@ -25,11 +25,28 @@ Route::get('/', function () {
     return view('Guest.homePage');
 })->name('homePage');
 
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/medicament', [viewsController::class, 'medicineList'])->name('medicineList');
+
+Route::get('/dashboard', [viewsController::class, 'adminDashboard'])->name('adminDashboard');
+
+
 
 Route::get('/about-us', function () {
     return view('Guest.about-us');
 })->name('about-us');
+
+/*
+|--------------------------------------------------------------------------
+| Authentification Routes
+|--------------------------------------------------------------------------
+*/
 
 Route::get('/login', function () {
     return view('Authentification.login');
@@ -38,6 +55,8 @@ Route::get('/login', function () {
 Route::get('/forgot-password', function () {
     return view('Authentification.forgot-password');
 })->name('forgot-password');
+
+
 
 /*
 |--------------------------------------------------------------------------
