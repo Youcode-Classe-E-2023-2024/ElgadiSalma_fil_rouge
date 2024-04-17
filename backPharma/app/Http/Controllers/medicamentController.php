@@ -25,7 +25,7 @@ class MedicamentController extends Controller
         $imageExtension = $image->getClientOriginalExtension();
         $imageFullName = $imageName . '_' . time() . '.' . $imageExtension;
 
-        $image->storeAs('images', $imageFullName, 'public');
+        $image->storeAs('images/medicines', $imageFullName, 'public');
 
         $user = Auth::user();
 
