@@ -45,10 +45,10 @@
         <ul class="nav navbar-nav">
           
           <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu p-ph-res"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{ asset('storage/users/' . $me->photo) }}" class="user-image" alt="User Image"> <span class="hidden-xs">{{ $me->name }}</span> </a>
+          <li class="dropdown user user-menu p-ph-res"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="{{ asset('storage/images/users/' . $me->photo) }}" class="user-image" alt="User Image"> <span class="hidden-xs">{{ $me->name }}</span> </a>
             <ul class="dropdown-menu">
               <li class="user-header">
-                <div class="pull-left user-img"><img src="{{ asset('storage/users/' . $me->photo) }}" class="img-responsive" alt="User"></div>
+                <div class="pull-left user-img"><img src="{{ asset('storage/images/users/' . $me->photo) }}" class="img-responsive" alt="User"></div>
                 <p class="text-left">{{ $role->name }} <small>{{ $me->email }}</small> </p>
                 <div class="view-link text-left"><a href="#">View Profile</a> </div>
               </li>
