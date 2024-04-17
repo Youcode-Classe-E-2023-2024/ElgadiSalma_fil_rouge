@@ -13,9 +13,17 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'photo' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'password' => 'required',
         ]);
+
+        
+        $image = $request->file('photo');
+        $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $imageExtension = $image->getClientOriginalExtension();
+        $imageFullName = $imageName . '_' . time() . '.' . $imageExtension;
+
+        $image->storeAs('images/users', $imageFullName, 'public');
 
         $user = Auth::user();
 
@@ -23,7 +31,7 @@ class UserController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'photo' => $request->photo,
+                'photo' => $imageFullName,
                 'password' => bcrypt($request->password),
                 'role_id' => '2',
                 'completed' => false,
