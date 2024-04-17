@@ -17,8 +17,15 @@ class MedicamentController extends Controller
             'price' => 'required',
             'category' => 'required',
             'expiration' => 'required|date',
-            'image' =>'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
+
+        $image = $request->file('image');
+        $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $imageExtension = $image->getClientOriginalExtension();
+        $imageFullName = $imageName . '_' . time() . '.' . $imageExtension;
+
+        $image->storeAs('images', $imageFullName, 'public');
 
         $user = Auth::user();
 
@@ -28,10 +35,9 @@ class MedicamentController extends Controller
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'price' => $request->input('price'),
-                'image' => $request->input('image'),
+                'image' => $imageFullName,
                 'category_id' => $request->input('category'),
                 'expiration' => $request->input('expiration'),
-                // 'created_by' => $user->id,
             ]);
 
             return redirect()->back()->with('success', "Médicament ajouté avec succès");
