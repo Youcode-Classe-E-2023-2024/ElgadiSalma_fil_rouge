@@ -11,12 +11,13 @@ class MedicamentController extends Controller
 {
     public function addMedicine(Request $request)
     {
+        // dd($request);
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'price' => 'required',
-            'category' => 'required',
-            'expiration' => 'required|date',
+            'price' => 'required|integer',
+            'category' => 'required|integer',
+            'expiration' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
@@ -31,7 +32,7 @@ class MedicamentController extends Controller
 
         if ($user->role_id == '1') 
         {
-            $medicine = Medicine::create([
+            Medicine::create([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'price' => $request->input('price'),

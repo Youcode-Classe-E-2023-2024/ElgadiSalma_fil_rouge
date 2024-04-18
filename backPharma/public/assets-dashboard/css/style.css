@@ -106,6 +106,9 @@ a:hover, a:active, a:focus {
 	background-color: #ecf0f5;
 	float:left;
 	width:100%;
+    display: flex;
+	justify-content: space-between;
+    flex-direction: column;
 }
 .main-footer {
 	background: #fff;
@@ -1232,9 +1235,22 @@ ul.list-inline li {
 }
 .dropdown-menu>li>a {
 	color: #777;
-	padding: 6px 20px;
+	display: flex;
+	padding-left: 10px;
+}
+.dropdown-menu>li>a>form {
+	color: #777;
 	display: block;
+}
+.dropdown-menu>li>a>i {
+	padding-top: 3px;
+}
+.dropdown-menu>li>a>form>button {
+	color: #777;
 	font-size: 14px;
+	display: flex;
+	border: none;
+  	background-color: transparent;
 }
 .dropdown-menu>li>a>.glyphicon, .dropdown-menu>li>a>.fa, .dropdown-menu>li>a>.ion {
 	margin-right: 10px
