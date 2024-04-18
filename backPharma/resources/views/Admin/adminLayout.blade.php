@@ -10,6 +10,118 @@
 <!-- v4.0.0-alpha.6 -->
 <link rel="stylesheet" href="assets-dashboard/bootstrap/css/bootstrap.min.css">
 
+<style>
+.SubmitAddMedicine {
+  position: relative;
+  margin:1rem 10rem;
+  padding: 10px 35%;
+  outline: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #fff;
+  border: 1px solid rgba(61, 202, 181, 0.6);
+  border-radius: 10px;
+  color: #3aaf94;
+  font-weight: 400;
+  font-family: inherit;
+  z-index: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.SubmitAddMedicine span {
+  color: #0d6761;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.7px;
+}
+
+.SubmitAddMedicine:hover {
+  animation: rotate624 0.7s ease-in-out both;
+}
+
+.SubmitAddMedicine:hover span {
+  animation: storm1261 0.7s ease-in-out both;
+  animation-delay: 0.06s;
+}
+
+@keyframes rotate624 {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: rotate(3deg) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: rotate(-3deg) translate3d(0, 0, 0);
+  }
+
+  75% {
+    transform: rotate(1deg) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes storm1261 {
+  0% {
+    transform: translate3d(0, 0, 0) translateZ(0);
+  }
+
+  25% {
+    transform: translate3d(4px, 0, 0) translateZ(0);
+  }
+
+  50% {
+    transform: translate3d(-3px, 0, 0) translateZ(0);
+  }
+
+  75% {
+    transform: translate3d(2px, 0, 0) translateZ(0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) translateZ(0);
+  }
+}
+
+.btn-shine {
+  border: 1px solid;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-shine span {
+  z-index: 20;
+}
+
+.btn-shine:after {
+  background: #38ef7d;
+  content: "";
+  height: 155px;
+  left: -75px;
+  opacity: 0.4;
+  position: absolute;
+  top: -50px;
+  transform: rotate(35deg);
+  transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+  width: 50px;
+  z-index: -10;
+}
+
+.btn-shine:hover:after {
+  left: 120%;
+  transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+</style>
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
@@ -52,7 +164,7 @@
                 <p class="text-left">{{ $role->name }} <small>{{ $me->email }}</small> </p>
                 <div class="view-link text-left"><a href="#">View Profile</a> </div>
               </li>
-              <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+              <li><a href=""><i class="fa fa-power-off"></i><form action="{{ route('logout') }}" method="POST">@csrf<button type="submit">Logout</button></form> </a></li>
             </ul>
           </li>
         </ul>
@@ -76,11 +188,9 @@
         
         <li><a href="#"><i class="fa fa-edit"></i> <span>Forms</span></a>
           <ul>
-            <li><a href="form-elements.html">Form Elements</a></li>
-            <li><a href="form-validation.html">Form Validation</a></li>
-            <li><a href="form-wizard.html">Form Wizard</a></li>
-            <li><a href="form-layouts.html">Form Layouts</a></li>
-            <li><a href="form-uploads.html">Form File Upload</a></li>
+            <li><a href="/addMedicine">Medicament</a></li>
+            <li><a href="form-validation.html">Utilisateur</a></li>
+            
             
             <li><a href="form-summernote.html">Summernote</a></li>
           </ul>
