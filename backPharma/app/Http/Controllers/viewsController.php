@@ -20,9 +20,10 @@ class viewsController extends Controller
 
     public function adminDashboard()
     {
-        $categories = Category::all()->paginate(3, ['*'], 'categories');
-        $Users = User::all()->paginate(3, ['*'], 'users');
-        $Pharmacies = Pharmacie::all()->paginate(3, ['*'], 'pharmacies');
+        $categories = Category::paginate(2, ['*'], 'category');
+        $Users = User::paginate(2, ['*'], 'users');
+        $Pharmacies = Pharmacie::paginate(2, ['*'], 'pharmacies');
+        $Medicines = Medicine::all();
         $me = Auth::user();
         $role = Role::find($me->role_id);
         $data = [
@@ -31,9 +32,17 @@ class viewsController extends Controller
             'totalPharmacies' => Pharmacie::count(),
             'totalUsers' => User::count(),
         ];
-        
 
-        return view('Admin.adminDashboard', ['me' => $me, 'role' => $role, 'data' => $data, 'categories' => $categories, 'Users' => $Users ,'Pharmacies' => $Pharmacies]);    
+
+        return view('Admin.adminDashboard', [
+            'me' => $me,
+            'role' => $role,
+            'data' => $data,
+            'categories' => $categories,
+            'Users' => $Users,
+            'Pharmacies' => $Pharmacies,
+            'Medicines' => $Medicines
+        ]);
     }
 
 
@@ -42,20 +51,20 @@ class viewsController extends Controller
         $me = Auth::user();
         $role = Role::find($me->role_id);
         $categories = Category::all();
-        return view('Admin.addMedicine',['me'=> $me,'role' => $role, 'categories'=> $categories]);    
+        return view('Admin.addMedicine', ['me' => $me, 'role' => $role, 'categories' => $categories]);
     }
 
     public function addUserView()
     {
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        return view('Admin.addUser',['me'=> $me,'role' => $role]);    
+        return view('Admin.addUser', ['me' => $me, 'role' => $role]);
     }
 
     public function addCategoryView()
     {
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        return view('Admin.addCategory',['me'=> $me,'role' => $role]);    
+        return view('Admin.addCategory', ['me' => $me, 'role' => $role]);
     }
 }

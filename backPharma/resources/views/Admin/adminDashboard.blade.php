@@ -64,10 +64,10 @@
                 <div class="box box-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-aqua-active">
-                        <h3 class="widget-user-username">Alexander Pierce</h3>
-                        <h6 class="widget-user-desc">Founder &amp; CEO</h6>
+                        <h3 class="widget-user-username">PharmaStock</h3>
+                        <h6 class="widget-user-desc">ElGadi Salma -> Founder &amp; CEO</h6>
                     </div>
-                    <div class="widget-user-image"> <img class="img-circle" src="assets-dashboard/img/img3.jpg"
+                    <div class="widget-user-image"> <img class="img-circle" src="{{ asset('storage/images/users/' . $me->photo) }}"
                             alt="User Avatar"> </div>
                     <div class="box-footer">
                         <div class="text-center">
@@ -77,20 +77,20 @@
                         <div class="row margin-bottom">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header">3,200</h5>
+                                    <h5 class="description-header">{{ $data['totalPharmacies'] }}</h5>
                                     <span class="description-text">SALES</span>
                                 </div>
                             </div>
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
-                                    <h5 class="description-header">13,000</h5>
+                                    <h5 class="description-header">{{ $data['totalUsers'] }}</h5>
                                     <span class="description-text">FOLLOWERS</span>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="description-block">
-                                    <h5 class="description-header">35</h5>
-                                    <span class="description-text">PRODUCTS</span>
+                                    <h5 class="description-header">{{ $data['totalMedicines'] }}</h5>
+                                    <span class="description-text">Medicines</span>
                                 </div>
                             </div>
                         </div>
@@ -121,28 +121,29 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($Users as $user)
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
-                                                                <img class="img-fluid" src="{{ asset('storage/images/users/' . $user->photo) }}" alt="">
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div
+                                                                    style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                                                                    <img class="img-fluid"
+                                                                        src="{{ asset('storage/images/users/' . $user->photo) }}"
+                                                                        alt="">
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>{{ $user->name }}</td>
-                                                    <td>{{ $user->created_at }}</td>
-                                                </tr>
+                                                        </td>
+                                                        <td>{{ $user->name }}</td>
+                                                        <td>{{ $user->created_at }}</td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                                {{ $Users->links('pagination::bootstrap-4') }}
+
                             </div>
-                            <div class="row justify-content-center">
-                                <div class="col-auto">
-                                    {{ $users->links() }}
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-lg-4 grid-margin stretch-card">
                             <div class="card">
@@ -156,22 +157,35 @@
                                             <!-- Table 2 content goes here -->
                                             <thead>
                                                 <tr>
+                                                    <th>Logo</th>
                                                     <th>Name</th>
-                                                    <th>ID No.</th>
                                                     <th>Created At</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Marlo Sanki</td>
-                                                    <td>53425532</td>
-                                                    <td>15 May 2015</td>
-                                                </tr>
+                                                @foreach ($Pharmacies as $pharmacy)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div
+                                                                    style="width: 50px; height: 50px; border-radius: 50%; overflow: hidden;">
+                                                                    <img class="img-fluid"
+                                                                        src="{{ asset('storage/images/pharmacies/' . $pharmacy->logo) }}"
+                                                                        alt="">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ $pharmacy->name }}</td>
+                                                        <td>{{ $pharmacy->created_at }}</td>
+                                                    </tr>
+                                                @endforeach
                                                 <!-- Add more rows if needed -->
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                                {{ $Pharmacies->links('pagination::bootstrap-4') }}
+
                             </div>
                         </div>
                         <div class="col-lg-4 grid-margin stretch-card">
@@ -202,6 +216,7 @@
                                         </table>
                                     </div>
                                 </div>
+                                {{ $categories->links('pagination::bootstrap-4') }}
                             </div>
                         </div>
                     </div>
@@ -339,15 +354,14 @@
                 </div>
             </div>
             <!-- /.Comments end -->
-            <div class="col-lg-4 m-b-2">
+            <div class="d-flex justify-content-center ">
+            <div class="w-100 col-lg-5 m-b-2">
                 <div id="carouselExampleControls3" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active"> <img src="assets-dashboard/img/img7.jpg"
-                                class="img-responsive img-rounded" alt="User Image"></div>
-                        <div class="carousel-item"> <img src="assets-dashboard/img/img8.jpg"
-                                class="img-responsive img-rounded" alt="User Image"> </div>
-                        <div class="carousel-item"> <img src="assets-dashboard/img/img9.jpg"
-                                class="img-responsive img-rounded" alt="User Image"> </div>
+                        @foreach ($Pharmacies as $pharmacie )
+                        <div class="carousel-item active"> <img src="{{ asset('storage/images/pharmacies/' . $pharmacie->logo) }}"
+                            class="img-responsive img-rounded" alt="Pharma Logo"></div>
+                        @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls3" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
@@ -357,82 +371,23 @@
                             class="sr-only">Next</span> </a>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="soci-wid-box bg-twitter m-b-3">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <div class="col-lg-12 text-center">
-                                    <div class="sco-icon"><i class="ti-twitter-alt"></i></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent
-                                        libero sed cursus ante.</p>
-                                    <p class="text-italic pt-1">- John Doe -</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-lg-12 text-center">
-                                    <div class="sco-icon"><i class="ti-twitter-alt"></i></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent
-                                        libero sed cursus ante.</p>
-                                    <p class="text-italic pt-1">- John Doe -</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-lg-12 text-center">
-                                    <div class="sco-icon"><i class="ti-twitter-alt"></i></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent
-                                        libero sed cursus ante.</p>
-                                    <p class="text-italic pt-1">- John Doe -</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                            data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-                                class="sr-only">Previous</span> </a> <a class="carousel-control-next"
-                            href="#carouselExampleControls" role="button" data-slide="next"> <span
-                                class="carousel-control-next-icon" aria-hidden="true"></span> <span
-                                class="sr-only">Next</span> </a>
+            <div class="w-100 col-lg-5 m-b-2">
+                <div id="carouselExampleControls3" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        @foreach ($Medicines as $medicine )
+                        <div class="carousel-item active"> <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}"
+                            class="img-responsive img-rounded" alt="Medicine Image"></div>
+                        @endforeach
                     </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls3" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+                            class="sr-only">Previous</span> </a> <a class="carousel-control-next"
+                        href="#carouselExampleControls3" role="button" data-slide="next"> <span
+                            class="carousel-control-next-icon" aria-hidden="true"></span> <span
+                            class="sr-only">Next</span> </a>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="soci-wid-box bg-facebook m-b-3">
-                    <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <div class="col-lg-12 text-center">
-                                    <div class="sco-icon"><i class="ti-facebook"></i></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent
-                                        libero sed cursus ante.</p>
-                                    <p class="text-italic pt-1">- John Doe -</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-lg-12 text-center">
-                                    <div class="sco-icon"><i class="ti-facebook"></i></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent
-                                        libero sed cursus ante.</p>
-                                    <p class="text-italic pt-1">- John Doe -</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="col-lg-12 text-center">
-                                    <div class="sco-icon"><i class="ti-facebook"></i></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent
-                                        libero sed cursus ante.</p>
-                                    <p class="text-italic pt-1">- John Doe -</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls1" role="button"
-                            data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-                                class="sr-only">Previous</span> </a> <a class="carousel-control-next"
-                            href="#carouselExampleControls1" role="button" data-slide="next"> <span
-                                class="carousel-control-next-icon" aria-hidden="true"></span> <span
-                                class="sr-only">Next</span> </a>
-                    </div>
-                </div>
-            </div>
+        </div>
         </div>
     </div>
     <!-- /.content -->
