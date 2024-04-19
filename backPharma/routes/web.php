@@ -38,6 +38,11 @@ Route::get('/addMedicine', [viewsController::class, 'addMedicineView'])->name('a
 
 Route::get('/dashboard', [viewsController::class, 'adminDashboard'])->name('adminDashboard');
 
+Route::get('/addUser', [viewsController::class, 'addUserView'])->name('addUserView');
+
+Route::get('/addCategory', [viewsController::class, 'addCategoryView'])->name('addCategoryView');
+
+
 
 
 Route::get('/about-us', function () {
