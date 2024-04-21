@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stock;
 use App\Models\Medicine;
+use App\Models\Pharmacie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -30,9 +32,8 @@ class MedicamentController extends Controller
 
         $user = Auth::user();
 
-        if ($user->role_id == '1') 
-        {
-            Medicine::create([
+        if ($user->role_id == '1') {
+            $medicine = Medicine::create([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'price' => $request->input('price'),
@@ -41,9 +42,22 @@ class MedicamentController extends Controller
                 'expiration' => $request->input('expiration'),
             ]);
 
+            if ($medicine) {
+                $pharmacies = Pharmacie::all();
+                foreach ($pharmacies as $pharmaId) {
+                    Stock::create([
+                        'pharmacie_id' => $pharmaId->id,
+                        'medicament_id' => $medicine->id,
+                        'initialNumber' => 0,
+                        'number' => 0,
+                        'finished' => true,
+                        'price' => '0',
+                    ]);
+                }
+            }
+
             return redirect()->back()->with('success', "Médicament ajouté avec succès");
-        }
-        else{
+        } else {
             return redirect()->back()->with('error', "Vous n'avez pas la permission d'ajouter un médicament");
         }
     }
@@ -58,19 +72,19 @@ class MedicamentController extends Controller
             'price' => 'required',
             'category' => 'required',
             'expiration' => 'required|date',
-            'image' =>'required',
+            'image' => 'required',
         ]);
 
         if (!$medicine) {
             return redirect()->back()->with('error', "Médicament non trouvé");
         }
 
-        $medicine-> name = $request->input('name');
-        $medicine-> description = $request->input('description');
-        $medicine-> price = $request->input('price');
-        $medicine-> image = $request->input('image');
-        $medicine-> category_id = $request->input('category');
-        $medicine-> expiration = $request->input('expiration');
+        $medicine->name = $request->input('name');
+        $medicine->description = $request->input('description');
+        $medicine->price = $request->input('price');
+        $medicine->image = $request->input('image');
+        $medicine->category_id = $request->input('category');
+        $medicine->expiration = $request->input('expiration');
 
         $medicine->save();
 
