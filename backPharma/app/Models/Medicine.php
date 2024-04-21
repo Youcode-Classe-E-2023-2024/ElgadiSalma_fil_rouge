@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Medicine extends Model
 {
@@ -21,4 +22,8 @@ class Medicine extends Model
 
     protected $table = 'medicament';
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
