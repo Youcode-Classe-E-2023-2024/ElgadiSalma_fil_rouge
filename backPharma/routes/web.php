@@ -45,6 +45,23 @@ Route::get('/addCategory', [viewsController::class, 'addCategoryView'])->name('a
 
 
 
+
+/*
+|--------------------------------------------------------------------------
+| Moderateur Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/dashboardM', [viewsController::class, 'moderateurDashboard'])->name('moderateurDashboard');
+
+Route::get('/medicines', [viewsController::class, 'medicineUser'])->name('medicineListUser');
+
+Route::get('/vente', [viewsController::class, 'venteView'])->name('venteView');
+
+Route::get('/pharmaAdd', [viewsController::class, 'pharmaAddView'])->name('pharmacie.view');
+
+Route::get('/commande', [viewsController::class, 'addCommandeView'])->name('addCommandeView');
+
+
 Route::get('/about-us', function () {
     return view('Guest.about-us');
 })->name('about-us');
