@@ -16,19 +16,24 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = request(['email', 'password']);
-
+    
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
-    
-            return redirect()->route('homePage');
+            
+            $user = Auth::user();
+            if($user->role_id == 2 && $user->completed == false) 
+            {
+                return redirect()->route('pharmacie.view');
+            } else {
+                return redirect()->route('homePage');
+            }
         }   
         
         return back()->withErrors([
             'email' => 'Invalid email or password',
         ]);
-        
     }
-
+    
     public function logout(Request $request)
     {
         Auth::logout();
