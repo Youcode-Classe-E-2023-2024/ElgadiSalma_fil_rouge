@@ -60,7 +60,7 @@ class PharmaController extends Controller
                 }
             }
 
-            return redirect()->back()->with('success', "Pharmacie ajoutée avec succès");
+            return redirect('moderateurDashboard')->with('success', "Pharmacie ajoutée avec succès");
         } else {
             return redirect()->back()->with('error', "Échec de l'ajout de la pharmacie");
         }
