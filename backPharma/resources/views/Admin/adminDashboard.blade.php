@@ -44,8 +44,8 @@
         <!-- /.row -->
         <!-- Main row -->
         <div class="row d-flex flex-wrap">
-            <div class="d-flex flex-wrap w-50">
-                <div class="col-lg-8 col-xlg-9 w-100">
+            <div class="d-flex w-100">
+                <div class="col-lg-6">
                     <div class="info-box">
                         <div class="d-flex flex-wrap">
                             <div>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-8 col-xlg-9 w-100">
+                <div class="col-lg-6">
                     <div class="info-box">
                         <div class="d-flex flex-wrap">
                             <div>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
             </div>
-            <div class="">
+            <div class="w-100 m-3">
                 <div class="box box-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-aqua-active">
