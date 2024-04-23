@@ -78,7 +78,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors(["You don't have the permission to delete $deletedUser->name"]);
         }
 
-        return redirect()->route('success')->with('message', 'User deleted successfully');
+        return redirect()->back()->with('message', 'User deleted successfully');
     }
 
     public function editUser(Request $request, $id)
@@ -86,44 +86,35 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'photo' => 'required',
-            'password' => 'required',
+        ], [
+            'name.required' => 'Veuillez entrer le nom',
+            'email.required' => 'Veuillez entrer l\'adresse email',
+            'email.email' => 'Veuillez entrer une adresse email valide.',
+            'email.unique' => 'Already exist',
         ]);
-
+    
         $user = Auth::user();
-
         $editedUser = User::find($id);
-
+    
         if (!$editedUser) {
             return redirect()->back()->withErrors(['User not found']);
         }
-
+    
         if ($editedUser->role_id == '2') {
-            if ($user->role_id == '1') {
-                $editedUser->name = $request->input('name');
-                $editedUser->email = $request->input('email');
-                $editedUser->photo = $request->input('photo');
-                $editedUser->password = bcrypt($request->password);
-
-                $editedUser->save();
-            } else {
-                return redirect()->back()->withErrors(["You don't have the permission to edit $editedUser->name"]);
+            if ($user->role_id != '1') {
+                return redirect()->back()->withErrors(["la permission denied"]);
             }
         } elseif ($editedUser->role_id == '3') {
-            if ($user->role_id == '3') {
-                return redirect()->back()->withErrors(["You don't have the permission to edit $editedUser->name"]);
-            } else {
-                $editedUser->name = $request->input('name');
-                $editedUser->email = $request->input('email');
-                $editedUser->photo = $request->input('photo');
-                $editedUser->password = bcrypt($request->password);
-
-                $editedUser->save();
+            if ($user->role_id != '3') {
+                return redirect()->back()->withErrors(["Permission denied"]);
             }
-        } else {
-            return redirect()->back()->withErrors(["You don't have the permission to edit $editedUser->name"]);
         }
-
-        return redirect()->route('success')->with('message', 'User edited successfully');
+    
+        $editedUser->name = $request->input('name');
+        $editedUser->email = $request->input('email');
+        $editedUser->save();
+    
+        return redirect()->back()->with('message', 'Utilisateur modifié avec succès');
     }
+    
 }
