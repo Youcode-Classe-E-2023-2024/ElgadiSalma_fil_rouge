@@ -61,6 +61,9 @@ Route::get('/pharmaAdd', [viewsController::class, 'pharmaAddView'])->name('pharm
 
 Route::get('/commande', [viewsController::class, 'addCommandeView'])->name('addCommandeView');
 
+Route::get('/approuvements', [viewsController::class, 'approuveView'])->name('approuveView');
+
+
 
 Route::get('/about-us', function () {
     return view('Guest.about-us');
