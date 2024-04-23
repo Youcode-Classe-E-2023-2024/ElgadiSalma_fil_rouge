@@ -26,13 +26,9 @@
     <!-- Include SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
     <style>
         .card {
@@ -313,7 +309,7 @@
                     <li class="treeview"> <a href="#"> <i class="fa fa-bullseye"></i> <span>Apps</span> <span
                                 class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
-                            <li><a href="/medicines">Medicines</a></li>
+                            <li><a href="/approuvements">Approuvements</a></li>
                         </ul>
                     </li>
                     <li class="treeview"> <a href="#"> <i class="fa fa-envelope-o "></i> <span>Inbox</span>
