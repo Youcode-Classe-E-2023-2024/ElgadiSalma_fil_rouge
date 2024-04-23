@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use App\Models\Role;
+use App\Models\Stock;
 use App\Models\Category;
+use App\Models\Commande;
 use App\Models\Medicine;
 use App\Models\Pharmacie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +24,7 @@ class viewsController extends Controller
 
     public function medicineUser()
     {
-        
+
         $medicines = Medicine::orderBy('created_at', 'desc')->get();
         $me = Auth::user();
         $role = Role::find($me->role_id);
@@ -42,6 +45,20 @@ class viewsController extends Controller
 
     public function adminDashboard()
     {
+        $pharmaStatistics = Pharmacie::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('COUNT(*) as pharma_count')
+        )
+        ->groupBy('date')
+        ->get();
+
+        $medicineStatistics = medicine::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('COUNT(*) as medicine_count')
+        )
+        ->groupBy('date')
+        ->get();
+
         $categories = Category::paginate(2, ['*'], 'category');
         $Users = User::paginate(2, ['*'], 'users');
         $Pharmacies = Pharmacie::paginate(2, ['*'], 'pharmacies');
@@ -63,7 +80,9 @@ class viewsController extends Controller
             'categories' => $categories,
             'Users' => $Users,
             'Pharmacies' => $Pharmacies,
-            'Medicines' => $Medicines
+            'Medicines' => $Medicines,
+            'pharmaStatistics' => $pharmaStatistics,
+            'medicineStatistics' => $medicineStatistics
         ]);
     }
 
@@ -123,18 +142,29 @@ class viewsController extends Controller
         $medicines = Medicine::with('category')->orderBy('created_at', 'desc')->get();
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        $data = [
-            'totalMedicines' => Medicine::count(),
-            'totalCategories' => Category::count(),
-            'totalPharmacies' => Pharmacie::count(),
-            'totalUsers' => User::count(),
-        ];
-        // $categories = Category::all();
+
+        // calcule la somme des valeurs de la colonne "number" pour les columns ayant le même "medicament_id" dans la table "Stock".
+        $stocks = Stock::select('medicament_id', DB::raw('SUM(number) as total_number'))
+            ->where('finished', false)
+            ->where('pharmacie_id', $me->pharmacie_id)
+            ->groupBy('medicament_id')
+            ->get();
+
+        $stockTotals = [];
+        if($stocks){
+            foreach ($stocks as $stock) {
+                $stockTotals[$stock->medicament_id] = $stock->total_number ?? 0;
+            }
+        }
+
+        // dd($stockTotals);
+        
 
         return view('Moderateur.medicineUser', [
             'me' => $me,
             'role' => $role,
-            'medicines' => $medicines
+            'medicines' => $medicines,
+            'stockTotals' => $stockTotals,         
         ]);
     }
 
@@ -142,7 +172,7 @@ class viewsController extends Controller
     {
         $cities = City::all();
 
-        return view('Moderateur.addPharma' , ['cities' => $cities]);
+        return view('Moderateur.addPharma', ['cities' => $cities]);
     }
 
     public function addCommandeView()
@@ -150,12 +180,8 @@ class viewsController extends Controller
         $medicines = Medicine::with('category')->orderBy('created_at', 'desc')->get();
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        $data = [
-            'totalMedicines' => Medicine::count(),
-            'totalCategories' => Category::count(),
-            'totalPharmacies' => Pharmacie::count(),
-            'totalUsers' => User::count(),
-        ];
+        
+        
         // $categories = Category::all();
 
         return view('Moderateur.addCommande', [
@@ -164,5 +190,20 @@ class viewsController extends Controller
             'medicines' => $medicines
         ]);
     }
-    
+
+    public function approuveView()
+    {
+        $commandes = Commande::orderBy('created_at', 'desc')->where('accepted', false)->get();
+        $me = Auth::user();
+        $role = Role::find($me->role_id);
+        
+        // dd($commandes);
+        // $categories = Category::all();
+
+        return view('Moderateur.approuvemets', [
+            'me' => $me,
+            'role' => $role,
+            'commandes' => $commandes
+        ]);
+    }
 }

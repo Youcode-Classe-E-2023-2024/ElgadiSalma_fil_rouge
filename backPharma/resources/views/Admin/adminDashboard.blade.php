@@ -43,32 +43,39 @@
         </div>
         <!-- /.row -->
         <!-- Main row -->
-        <div class="row">
-            <div class="col-lg-8 col-xlg-9">
-                <div class="info-box">
-                    <div class="d-flex flex-wrap">
-                        <div>
-                            <h5 class="text-black">Yearly Earning</h5>
+        <div class="row d-flex flex-wrap">
+            <div class="d-flex flex-wrap w-50">
+                <div class="col-lg-8 col-xlg-9 w-100">
+                    <div class="info-box">
+                        <div class="d-flex flex-wrap">
+                            <div>
+                                <h5 class="text-black">Yearly Earning</h5>
+                            </div>
                         </div>
-                        <div class="ml-auto">
-                            <ul class="list-inline">
-                                <li class="text-aqua"> <i class="fa fa-circle"></i> Sales</li>
-                                <li class="text-blue"> <i class="fa fa-circle"></i> Earning ($)</li>
-                            </ul>
-                        </div>
+                        <canvas id="pharmaChart" class="w-100" height="150"></canvas>
                     </div>
-                    <div id="earning"></div>
+                </div>
+
+                <div class="col-lg-8 col-xlg-9 w-100">
+                    <div class="info-box">
+                        <div class="d-flex flex-wrap">
+                            <div>
+                                <h5 class="text-black">Yearly Earning</h5>
+                            </div>
+                        </div>
+                        <canvas id="medicineChart" class="w-100" height="150"></canvas>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-xlg-3">
+            <div class="">
                 <div class="box box-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-aqua-active">
                         <h3 class="widget-user-username">PharmaStock</h3>
                         <h6 class="widget-user-desc">ElGadi Salma -> Founder &amp; CEO</h6>
                     </div>
-                    <div class="widget-user-image"> <img class="img-circle" src="{{ asset('storage/images/users/' . $me->photo) }}"
-                            alt="User Avatar"> </div>
+                    <div class="widget-user-image"> <img class="img-circle"
+                            src="{{ asset('storage/images/users/' . $me->photo) }}" alt="User Avatar"> </div>
                     <div class="box-footer">
                         <div class="text-center">
                             <p> A small river named Duden flows by their place and with the necessary.</p>
@@ -223,144 +230,16 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="info-box">
-                    <div class="box box-warning direct-chat direct-chat-warning">
-                        <div class="box-header with-border">
-                            <h3 class="box-title text-black">Recent Chats</h3>
-                        </div>
-                        <div class="box-body">
-                            <!-- Conversations are loaded here -->
-                            <div class="direct-chat-messages">
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-info clearfix"> <span
-                                            class="direct-chat-name pull-left">Alexander Pierce</span> <span
-                                            class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span> </div>
-                                    <img class="direct-chat-img" src="assets-dashboard/img/img2.jpg" alt="user image">
-                                    <div class="direct-chat-text"> A small river named Duden flows by their place and
-                                        supplies it with the necessary. </div>
-                                </div>
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-info clearfix"> <span
-                                            class="direct-chat-name pull-right">Sarah Bullock</span> <span
-                                            class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span> </div>
-                                    <img class="direct-chat-img" src="assets-dashboard/img/img3.jpg" alt="user image">
-                                    <!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text"> You better believe it! </div>
-                                </div>
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-info clearfix"> <span
-                                            class="direct-chat-name pull-left">Alexander Pierce</span> <span
-                                            class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span> </div>
-                                    <img class="direct-chat-img" src="assets-dashboard/img/img4.jpg" alt="user image">
-                                    <div class="direct-chat-text"> A small river named Duden flows by their place and
-                                        supplies it with the necessary. </div>
-                                </div>
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-info clearfix"> <span
-                                            class="direct-chat-name pull-right">Sarah Bullock</span> <span
-                                            class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span> </div>
-                                    <img class="direct-chat-img" src="assets-dashboard/img/img5.jpg" alt="user image">
-                                    <div class="direct-chat-text"> I would love to. </div>
-                                </div>
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-info clearfix"> <span
-                                            class="direct-chat-name pull-left">Alexander Pierce</span> <span
-                                            class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span> </div>
-                                    <img class="direct-chat-img" src="assets-dashboard/img/img6.jpg" alt="user image">
-                                    <div class="direct-chat-text"> A small river named Duden flows by their place and
-                                        supplies it with the necessary. </div>
-                                </div>
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-info clearfix"> <span
-                                            class="direct-chat-name pull-right">Sarah Bullock</span> <span
-                                            class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span> </div>
-                                    <img class="direct-chat-img" src="assets-dashboard/img/img3.jpg" alt="user image">
-                                    <!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text"> You better believe it! </div>
-                                </div>
-                                <div class="direct-chat-msg">
-                                    <div class="direct-chat-info clearfix"> <span
-                                            class="direct-chat-name pull-left">Alexander Pierce</span> <span
-                                            class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span> </div>
-                                    <img class="direct-chat-img" src="assets-dashboard/img/img6.jpg" alt="user image">
-                                    <div class="direct-chat-text"> A small river named Duden flows by their place and
-                                        supplies it with the necessary. </div>
-                                </div>
-                                <div class="direct-chat-msg right">
-                                    <div class="direct-chat-info clearfix"> <span
-                                            class="direct-chat-name pull-right">Sarah Bullock</span> <span
-                                            class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span> </div>
-                                    <img class="direct-chat-img" src="assets-dashboard/img/img3.jpg" alt="user image">
-                                    <!-- /.direct-chat-img -->
-                                    <div class="direct-chat-text"> You better believe it! </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            <form action="#" method="post">
-                                <div class="input-group">
-                                    <input type="text" name="message" placeholder="Type Message ..."
-                                        class="form-control">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-warning btn-flat">Send</button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.Chat end -->
-            <div class="col-lg-6">
-                <div class="info-box">
-                    <div class="box box-widget">
-                        <div class="box-header with-border">
-                            <div class="user-block"> <img class="img-circle" src="assets-dashboard/img/img1.jpg"
-                                    alt="User Image"> <span class="username"><a href="#">Alexander
-                                        Pierce</a></span> <span class="description">Shared publicly - 8:15 AM Today</span>
-                            </div>
-                        </div>
-                        <div class="box-body"> <img class="img-responsive pad" src="assets-dashboard/img/img6.jpg"
-                                alt="Photo">
-                            <p>I took this photo this morning. What do you guys think?</p>
-                            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i>
-                                Share</button>
-                            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i>
-                                Like</button>
-                            <span class="pull-right text-muted">153 likes - 23 comments</span>
-                        </div>
-                        <div class="box-footer box-comments">
-                            <div class="box-comment"> <img class="img-circle img-sm" src="assets-dashboard/img/img3.jpg"
-                                    alt="User Image">
-                                <div class="comment-text"> <span class="username"> Maria Gonzales <span
-                                            class="text-muted pull-right">12:15 PM Today</span> </span> It is a long
-                                    established fact that a reader will be assets-dashboardracted. </div>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            <form action="#" method="post">
-                                <img class="img-responsive img-circle img-sm" src="assets-dashboard/img/img4.jpg"
-                                    alt="Alt Text">
-                                <!-- .img-push is used to add margin to elements next to floating images -->
-                                <div class="img-push">
-                                    <input type="text" class="form-control input-sm"
-                                        placeholder="Press enter to post comment">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.Comments end -->
-            <div class="d-flex justify-content-center ">
+
+
+        <div class="d-flex justify-content-center ">
             <div class="w-100 col-lg-5 m-b-2">
                 <div id="carouselExampleControls3" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        @foreach ($Pharmacies as $pharmacie )
-                        <div class="carousel-item active"> <img src="{{ asset('storage/images/pharmacies/' . $pharmacie->logo) }}"
-                            class="img-responsive img-rounded" alt="Pharma Logo"></div>
+                        @foreach ($Pharmacies as $pharmacie)
+                            <div class="carousel-item active"> <img
+                                    src="{{ asset('storage/images/pharmacies/' . $pharmacie->logo) }}"
+                                    class="img-responsive img-rounded" alt="Pharma Logo"></div>
                         @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls3" role="button" data-slide="prev">
@@ -374,9 +253,10 @@
             <div class="w-100 col-lg-5 m-b-2">
                 <div id="carouselExampleControls3" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        @foreach ($Medicines as $medicine )
-                        <div class="carousel-item active"> <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}"
-                            class="img-responsive img-rounded" alt="Medicine Image"></div>
+                        @foreach ($Medicines as $medicine)
+                            <div class="carousel-item active"> <img
+                                    src="{{ asset('storage/images/medicines/' . $medicine->image) }}"
+                                    class="img-responsive img-rounded" alt="Medicine Image"></div>
                         @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls3" role="button" data-slide="prev">
@@ -388,8 +268,80 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     </div>
     <!-- /.content -->
     </div>
+
+    <script>
+        const pharmaDates = @json($pharmaStatistics->pluck('date'));
+        const pharmaCounts = @json($pharmaStatistics->pluck('pharma_count'));
+
+        const medicineDates = @json($medicineStatistics->pluck('date'));
+        const medicineCounts = @json($medicineStatistics->pluck('medicine_count'));
+
+        const pharmaCtx = document.getElementById('pharmaChart').getContext('2d');
+        const pharmaChart = new Chart(pharmaCtx, {
+            type: 'line',
+            data: {
+                labels: pharmaDates,
+                datasets: [{
+                    label: 'Nombre de pharmacies ajoutées',
+                    data: pharmaCounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Nombre de pharmacies'
+                        }
+                    }
+                }
+            }
+        });
+
+        const medicineCtx = document.getElementById('medicineChart').getContext('2d');
+        const medicineChart = new Chart(medicineCtx, {
+            type: 'bar',
+            data: {
+                labels: medicineDates,
+                datasets: [{
+                    label: 'Nombre de médicaments ajoutés',
+                    data: medicineCounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Nombre de médicaments'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 @endsection
