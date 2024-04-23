@@ -13,49 +13,31 @@ class CommandeController extends Controller
     public function addCommande(Request $request)
     {
         $request->validate([
-            'medicament_id' => 'required|integer',
-            'number' => 'required|integer',
-            'dateExpiration' => 'required|date_format:Y-m-d|after_or_equal:' . now()->format('Y-m-d'),
-            'dateDepart' => 'required|date_format:Y-m-d',
-            'dateArrive' => 'required|date_format:Y-m-d|after_or_equal:dateDepart|after_or_equal:' . now()->format('Y-m-d'),
+            'commandes.*.medicament_id' => 'required|integer',
+            'commandes.*.number' => 'required|integer',
+            'commandes.*.dateExpiration' => 'required|date_format:Y-m-d|after_or_equal:' . now()->format('Y-m-d'),
+            'commandes.*.dateDepart' => 'required|date_format:Y-m-d',
+            'commandes.*.dateArrive' => 'required|date_format:Y-m-d|after_or_equal:dateDepart|after_or_equal:' . now()->format('Y-m-d'),
         ]);
-
+    
         $user = Auth::user();
-
-        if ($user->role_id == '3') 
-        {
-            $commande = Commande::create([
+    
+        foreach ($request->input('commandes') as $commandeData) {
+            Commande::create([
                 'pharmacie_id' => $user->pharmacie_id,
-                'medicament_id' => $request->input('medicament_id'),
-                'number' => $request->input('number'),
-                'dateExpiration' => $request->input('dateExpiration'),
-                'dateDepart' => $request->input('dateDepart'),
-                'dateArrive' => $request->input('dateArrive'),
-                'requested_by' =>$user->id,
+                'medicament_id' => $commandeData['medicament_id'],
+                'number' => $commandeData['number'],
+                'dateExpiration' => $commandeData['dateExpiration'],
+                'dateDepart' => $commandeData['dateDepart'],
+                'dateArrive' => $commandeData['dateArrive'],
+                'requested_by' => $user->id,
+                'accepted' => $user->role_id == '2' ? true : false,
             ]);
-
-            return redirect()->back()->with('success', "Commande ajoutée avec succès");
         }
-
-        elseif($user->role_id == '2'){
-            $commande = Commande::create([
-                'pharmacie_id' => $user->pharmacie_id,
-                'medicament_id' => $request->input('medicament_id'),
-                'number' => $request->input('number'),
-                'dateExpiration' => $request->input('dateExpiration'),
-                'dateDepart' => $request->input('dateDepart'),
-                'dateArrive' => $request->input('dateArrive'),
-                'requested_by' =>$user->id,
-                'accepted' => true,
-            ]);
-
-            return redirect()->back()->with('success', "Commande ajoutée avec succès");
-        }
-
-        else{
-            return redirect()->back()->with('error', "Vous n'avez pas la permission d'ajouter une commande");
-        }
+    
+        return redirect()->back()->with('success', "Commandes ajoutées avec succès");
     }
+    
 
     public function deleteCommande($id)
     {
