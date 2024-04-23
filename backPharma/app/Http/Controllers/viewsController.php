@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Role;
 use App\Models\Stock;
+use App\Models\Capitale;
 use App\Models\Category;
 use App\Models\Commande;
 use App\Models\Medicine;
@@ -99,9 +100,20 @@ class viewsController extends Controller
             'totalMedicines' => Medicine::count(),
             'totalCategories' => Category::count(),
             'totalPharmacies' => Pharmacie::count(),
-            'totalUsers' => User::count(),
+            'totalUsers' => User::where('pharmacie_id', $me->pharmacie_id)->count(),
         ];
 
+        $capitale = Capitale::where('pharmacie_id', $me->pharmacie_id)->get();
+
+        $stockStatistics = Stock::select(
+            DB::raw('DATE(created_at) as date'),
+            DB::raw('COUNT(*) as stock_count')
+        )
+        ->groupBy('date')
+        ->where('pharmacie_id', $me->pharmacie_id)
+        ->get();
+        
+        $employees = User::where('pharmacie_id', $me->pharmacie_id )->orderBy('created_at', 'asc')->paginate(4, ['*'], 'users');
 
         return view('Moderateur.moderateurDash', [
             'me' => $me,
@@ -110,7 +122,10 @@ class viewsController extends Controller
             'categories' => $categories,
             'Users' => $Users,
             'Pharmacies' => $Pharmacies,
-            'Medicines' => $Medicines
+            'Medicines' => $Medicines,
+            'stockStatistics' => $stockStatistics,
+            'employees' => $employees,
+            'capitale' => $capitale
         ]);
     }
 
