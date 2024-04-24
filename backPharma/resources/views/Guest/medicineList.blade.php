@@ -40,15 +40,13 @@
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="department_gd_inner">
                                 <div class="image">
-                                    <img src="assets/image/departments/department-1.jpg" class="img-fluid" alt="img" />
+                                    <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}" style="width: 16rem; height:17rem; display:flex; justify-content:center" class="img-fluid" alt="img" />
                                 </div>
                                 <div class="dp_content">
                                     <h2><a href="#">{{ $medicine->name }}</a></h2>
                                     <p>{{ $medicine->price }} DH</p>
-                                    @foreach ($stockTotals as $stockTotal)
-                                        <h1>{{ $stockTotal['total_number'] }}</h1>
-                                    @endforeach
-                                    <a href="#" class="read_">Read more</a>
+                                    
+                                    <a href="medicine/{{ $medicine->id }}" class="read_">Read more</a>
                                 </div>
                             </div>
                         </div>

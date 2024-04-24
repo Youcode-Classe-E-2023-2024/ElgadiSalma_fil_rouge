@@ -16,12 +16,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>PharmaStock</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="assets/fonts/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/responsive.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/font/flaticon.css') }}">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/image/fav/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="assets/image/fav/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ asset('assets/image/fav/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{{ asset('assets/image/fav/favicon-16x16.png') }}" sizes="16x16">
 
 </head>
 
@@ -52,14 +52,14 @@
                                     <div class="dropdown language-drp">
                                         <button type="button" class=" btn-primary dropdown-toggle"
                                             data-toggle="dropdown">
-                                            <img src="assets/image/language-1.jpg" alt="lan"> Eng
+                                            <img src="{{ asset('assets/image/language-1.jpg') }}" alt="lan"> Eng
                                         </button>
                                         <div class="dropdown-menu">
 
                                             <a class="dropdown-item" href="#"><img
-                                                    src="assets/image/language-2.jpg" alt="lan"> FRA</a>
+                                                    src="{{ asset('assets/image/language-2.jpg') }}" alt="lan"> FRA</a>
                                             <a class="dropdown-item" href="#"><img
-                                                    src="assets/image/language-1.jpg" alt="lan">GRE</a>
+                                                    src="{{ asset('assets/image/language-1.jpg') }}" alt="lan">GRE</a>
                                         </div>
                                     </div>
                                 </div>
@@ -70,8 +70,11 @@
             </div>
             <div class="navbar navbar-expand-lg bsnav bsnav-sticky bsnav-sticky-slide">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html"><img src="assets/image/default-logo.png" class="img-fluid"
-                            alt="img"></a>
+                    <a class="navbar-brand" href="index.html">
+                        <img src="{{ asset('assets/image/pharma_logo.png') }}" style="width: 50px" class="img-fluid"
+                            alt="img">
+                            <p>Pharma<span>Stock</span></p>
+                        </a>
                     <button class="navbar-toggler toggler-spring"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse">
                         <ul class="navbar-nav navbar-mobile ml-auto mr-auto">
@@ -252,22 +255,22 @@
 
 
     <!-----------------------------------script-------------------------------------->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/owl.js"></script>
-    <script src="assets/js/bsnav.min.js"></script>
-    <script src="assets/js/jquery-ui.js"></script>
+    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.js') }}"></script>
+    <script src="{{ asset('assets/js/bsnav.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-ui.js') }}"></script>
     <!---smooth-scrool-->
-    <script src="assets/js/SmoothScroll.min.js"></script>
-    <script src="assets/js/validator.min.js"></script>
-    <script src="assets/js/contact.js"></script>
-    <script src="assets/js/appear.js"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="{{ asset('assets/js/SmoothScroll.min.js') }}"></script>
+    <script src="{{ asset('assets/js/validator.min.js') }}"></script>
+    <script src="{{ asset('assets/js/contact.js') }}"></script>
+    <script src="{{ asset('assets/js/appear.js') }}"></script>
+    <script src="{{ asset('assets/js/script.js') }}"></script>
     <!--Google Map APi Key-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHzPSV2jshbjI8fqnC_C4L08ffnj5EN3A"></script>
-    <script src="assets/js/gmaps.js"></script>
-    <script src="assets/js/map-script.js"></script>
+    <script src="{{ asset('assets/js/gmaps.js') }}"></script>
+    <script src="{{ asset('assets/js/map-script.js') }}"></script>
     <!--End Google Map APi-->
 </body>
 

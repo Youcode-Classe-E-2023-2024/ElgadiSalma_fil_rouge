@@ -123,6 +123,7 @@ Route::get('helloworld', [AuthController::class, 'index']);
 Route::post('/medicine', [medicamentController::class, 'addMedicine'])->name('medicine.add');
 Route::put('/medicine/{id}', [medicamentController::class, 'editMedicine'])->name('medicine.edit');
 Route::delete('/medicine/{id}', [medicamentController::class, 'deleteMedicine'])->name('medicine.delete');
+Route::get('/medicine/{id}', [viewsController::class, 'showMedicine'])->name('medicine.show');
 
 
 /*
