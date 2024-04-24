@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\City;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pharmacie extends Model
 {
@@ -19,4 +20,9 @@ class Pharmacie extends Model
 
     protected $table = 'pharmacie';
 
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
+   
 }
