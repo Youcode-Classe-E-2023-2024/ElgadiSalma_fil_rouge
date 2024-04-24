@@ -449,7 +449,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">PERSONAL</li>
-                    <li class="active treeview"> <a href="#"> <i class="fa fa-dashboard"></i>
+                    <li class="active treeview"> <a href="/dashboardM"> <i class="fa fa-dashboard"></i>
                             <span>Dashboard</span> <span class="pull-right-container"> <i
                                     class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
@@ -460,22 +460,15 @@
                                 class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
                         <ul class="treeview-menu">
                             <li><a href="/approuvements">Approuvements</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview"> <a href="#"> <i class="fa fa-envelope-o "></i> <span>Inbox</span>
-                            <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="apps-mailbox.html">Mailbox</a></li>
-                            <li><a href="apps-mailbox-detail.html">Mailbox Detail</a></li>
-                            <li><a href="apps-compose-mail.html">Compose Mail</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview"> <a href="#"> <i class="fa fa-briefcase"></i> <span>UI Elements</span>
-                            <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span>
-                        </a>
-                        <ul class="treeview-menu">
                             <li><a href="/vente" class="active">Vente</a></li>
+
+                        </ul>
+                    </li>
+                    
+                    <li class="treeview"> <a href="#"> <i class="fa fa-briefcase"></i> <span>Formulaires</span>
+                            <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span>
+                        </a>
+                        <ul class="treeview-menu">
                             <li><a href="/addUser">AddUser</a></li>
                             <li><a href="/commande">addCommande</a></li>
                             
