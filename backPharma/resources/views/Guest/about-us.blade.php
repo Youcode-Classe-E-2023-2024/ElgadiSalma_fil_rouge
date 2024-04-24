@@ -25,27 +25,14 @@
          
          <!-----------------breadcrumb------------------------>
          <!-----------------welcome_section------------------------>
-         <section class="welcome_section hme-one" style="background:url(assets/image/welcome-hme-1-bg.jpg)"> 
+         <section class="welcome_section hme-one" style="background:url(assets/image/team-of-developers-2023-11-27-05-32-42-utc.jpg)"> 
             <div class="container">
          
                           
            
                <div class="row">
-                  <div class="col-lg-6">
-                     <div class="welcme_inner">
-                        <div class="heading clearfix">
-                              <h1>WELCOME TO <span>MEDITEX </span></h1>
-                        </div>
-                        <h6>Our mission is to provide first-class independent healthcare for the local community in a safe, comfortable, and welcoming environment.</h6>
-                        <p>In addition to delivering excellent care and service, we want to inspire people to see their health in a new way. More than doctor visits and medical tests, but a lifelong journey of small, manageable steps. These are some of the things we’ve been recognized for again and again over the years</p>
-                        <ul>
-                           <li><img src="assets/image/awards-1.png" class="img-fluid" alt="awards"></li>
-                           <li><img src="assets/image/awards-2.png" class="img-fluid" alt="awards"></li>
-                           <li><img src="assets/image/awards-3.png" class="img-fluid" alt="awards"></li>
-                           <li><img src="assets/image/awards-4.png" class="img-fluid" alt="awards"></li>
-                        </ul>
-                        <a href="#" class="theme-btn">GET IN TOUCH</a>
-                     </div>
+                  <div class="col-lg-6" style="height: 18rem">
+                     
                </div>
                   <div class="col-lg-6">
          
@@ -58,63 +45,22 @@
     
       <section class="department_section hm-one">
             <div class="container">
-                  <div class="row">
-                        <div class="col-lg-12">
-                              <div class="heading clearfix">
-                                    <h1>OUR <span>DEPARTMENTS</span></h1>
-                                    <p><a href="#"> VIEW ALL CASES</a></p>
-                              </div>
+               <div class="row">
+                  <div class="col-lg-6">
+                     <div class="welcme_inner">
+                        <div class="heading clearfix">
+                              <h1>WELCOME TO <span>PharmaStock </span></h1>
                         </div>
+                        <h6>Our mission is to provide first-class independent healthcare for the local community in a safe, comfortable, and welcoming environment.</h6>
+                        <p>In addition to delivering excellent care and service, we want to inspire people to see their health in a new way. More than doctor visits and medical tests, but a lifelong journey of small, manageable steps. These are some of the things we’ve been recognized for again and again over the years</p>
+                       
+                        <a href="#" class="theme-btn">GET IN TOUCH</a>
                      </div>
-                     <div class="department_inner">
-                         <div class="row">
-                            <div class="col-lg-12">
-             
-                               <div class="department_icon_content">
-                                 <a href="#"><span class="flaticon-brain dep_icon"></span></a> 
-                                 <a href="#"> <h2>Psychiatry</h2></a> 
-                                  <p>In its ongoing attempts to define, understand, and categorize disorders...</p>
-                               </div>
-                               <div class="department_icon_content">
-                                     <a href="#"><span class="flaticon-eye-drops dep_icon"></span></a>
-                                        <a href="#"><h2>Ophthalmology</h2></a>
-                                  <p>Our mission is to improve quality of life through the enhancement of vision...</p>
-                               </div>
-                               <div class="department_icon_content">
-                                     <a href="#"><span class="flaticon-heart-2 dep_icon"></span></a>
-                                        <a href="#"><h2>Cardiology</h2></a>
-                                  <p>&#8203;Our areas of expertise make the department a national cardiac referral centre...</p>
-                               </div>
-                               <div class="department_icon_content">
-                                     <a href="#"><span class="flaticon-bacteria dep_icon"></span></a>
-                                        <a href="#"><h2>Immunology</h2></a>
-                                  <p>The immune system provides the defense for an organism to repel invasion...</p>
-                               </div>
-                               <div class="department_icon_content">
-                                     <a href="#"><span class="flaticon-blood dep_icon"></span></a>
-                                        <a href="#"><h2>Hematology</h2></a>
-                                  <p>In the medical field, hemato-
-                                     logy includes the treatment of blood...</p>
-                               </div>
-                               <div class="department_icon_content">
-                                     <a href="#"><span class="flaticon-stomach dep_icon"></span></a>
-                                        <a href="#"><h2>Gastroenterology</h2></a>
-                                  <p>With nationally and inter- nationally known experts in gastroenterology...</p>
-                               </div>
-                               <div class="department_icon_content">
-                                     <a href="#"><span class="flaticon-joint dep_icon"></span></a>
-                                  <a href="#"></a><h2>Orthopedics</h2>
-                                  <p>We have a diverse team of clinicians, administrators, and researchers...</p>
-                               </div>
-                               <div class="department_icon_content">
-                                     <a href="#"><span class="flaticon-lung dep_icon"></span></a>
-                                        <a href="#"><h2>Pulmonary</h2></a>
-                                  <p>Medicol is one of the leading medical facilities in America for the diagnosis...</p>
-                               </div>
-             
-                            </div>
-                         </div>
-                      </div>
+               </div>
+                  <div class="col-lg-6">
+         
+                  </div>
+               </div>
             </div>
          </section>
     

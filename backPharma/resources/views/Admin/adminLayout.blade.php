@@ -255,7 +255,6 @@
         <header class="main-header">
             <!-- Logo -->
             <a href="index.html" class="logo blue-bg">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><img src="assets-dashboard/img/logo-n.png" alt=""></span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><img src="assets-dashboard/img/logo.png" alt=""></span> </a>
@@ -315,36 +314,15 @@
 
                     </li>
 
-                    <li><a href="#"><i class="fa fa-edit"></i> <span>Forms</span></a>
-                        <ul>
-                            <li><a href="/addMedicine">Medicament</a></li>
-                            <li><a href="/addUser">Utilisateur</a></li>
-                            <li><a href="/addCategory">Category</a></li>
-                        </ul>
+                    <li><a href="/addMedicine"><i class="fa fa-edit"></i> <span>Medicament</span></a>
                     </li>
 
-                    <li> <a href="#"> <i class="fa fa-files-o"></i> <span>Sample Pages</span></a>
-                        <ul>
-                            <li><a href="pages-blank.html">Blank page</a></li>
-                            <li><a href="#">Authentication</a>
-                                <ul>
-                                    <li><a href="pages-login.html">Login 1</a></li>
-                                    <li><a href="pages-login-2.html">Login 2</a></li>
-                                    <li><a href="pages-register.html">Register</a></li>
-                                    <li><a href="pages-register2.html">Register 2</a></li>
-                                    <li><a href="pages-lockscreen.html">Lockscreen</a></li>
-                                    <li><a href="pages-recover-password.html">Recover password</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="pages-profile.html">Profile page</a></li>
-                            <li><a href="pages-invoice.html">Invoice</a></li>
-                            <li><a href="pages-treeview.html">Treeview</a></li>
-                            <li><a href="pages-pricing.html">Pricing</a></li>
-                            <li><a href="pages-gallery.html">Gallery</a></li>
-                            <li><a href="pages-faq.html">Faqs</a></li>
-                            <li><a href="pages-404.html">404 Error Page</a></li>
-                        </ul>
+                    <li><a href="/addUser"><i class="fa fa-edit"></i> <span>Utilisateur</span></a>
                     </li>
+
+                    <li><a href="/addCategory"><i class="fa fa-edit"></i> <span>Category</span></a>
+                    </li>
+
                 </ul>
             </nav>
         </div>

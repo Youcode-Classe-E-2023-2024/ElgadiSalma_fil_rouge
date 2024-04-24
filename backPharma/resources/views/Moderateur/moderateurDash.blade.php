@@ -98,7 +98,7 @@
 
                     <div class="w-100 m-3">
                         <div class="box box-widget widget-user">
-                            <div class="widget-user-header bg-aqua-active">
+                            <div class="widget-user-header " style="background-color: #8AA79F">
                                 <h3 class="widget-user-username">PharmaStock</h3>
                                 <h6 class="widget-user-desc">ElGadi Salma -> Founder &amp; CEO</h6>
                             </div>
@@ -141,7 +141,7 @@
                 <div>
 
                     <div class="box box-widget widget-user-2">
-                        <div class="widget-user-header bg-yellow">
+                        <div class="widget-user-header" style="background-color: #8bcbba">
                             <h3> Employees ({{ $data['totalUsers'] }})</h3>
                         </div>
                         <ul class="products-list product-list-in-box">
@@ -192,7 +192,7 @@
                 <div class="mt-3">
 
                     <div class="box box-widget widget-user-2">
-                        <div class="widget-user-header bg-yellow">
+                        <div class="widget-user-header"  style="background-color: #8bcbba">
                             <h3> Commandes suggestées ({{ $data['totalCommande'] }})</h3>
                         </div>
                         <ul class="products-list product-list-in-box">
