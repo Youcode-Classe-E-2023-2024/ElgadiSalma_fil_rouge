@@ -137,55 +137,103 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 gap-10">
+                <div>
 
-                <div class="box box-widget widget-user-2">
-                    <div class="widget-user-header bg-yellow">
-                        <h3> Employees ({{ $data['totalUsers'] }})</h3>
-                    </div>
-                    <ul class="products-list product-list-in-box">
-                        @foreach ($employees as $employee)
-                            <li class="item">
-                                <form action="{{ route('user.edit', ['id' => $employee->id]) }}" method="POST">
-                                    @csrf
-                                    @method('put')
-                                    <div class="product-img"> <img
-                                            src="{{ asset('storage/images/users/' . $employee->photo) }}"
-                                            alt="Product Image">
-                                    </div>
-                                    <div class="product-info w-9">
-                                        @error('name')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                        <input class="product-title" name="name" value="{{ $employee->name }}"
-                                            style="background: none; border: none; color:rgb(21, 64, 94)" />
-                                        <span class="product-description">
-                                            @error('email')
+                    <div class="box box-widget widget-user-2">
+                        <div class="widget-user-header bg-yellow">
+                            <h3> Employees ({{ $data['totalUsers'] }})</h3>
+                        </div>
+                        <ul class="products-list product-list-in-box">
+                            @foreach ($employees as $employee)
+                                <li class="item">
+                                    <form action="{{ route('user.edit', ['id' => $employee->id]) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <div class="product-img"> <img
+                                                src="{{ asset('storage/images/users/' . $employee->photo) }}"
+                                                alt="Product Image">
+                                        </div>
+                                        <div class="product-info w-9">
+                                            @error('name')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
-                                            <input name="email" value="{{ $employee->email }}"
-                                                style="background: none; border: none; color:rgb(102, 107, 111)" />
-                                        </span>
-                                    </div>
-                                    <div class="d-flex justify-content-around p-1 gap-5">
-                                        <button type="submit" class="buttonEdit">
-                                            <span>Edit</span>
+                                            <input class="product-title" name="name" value="{{ $employee->name }}"
+                                                style="background: none; border: none; color:rgb(21, 64, 94)" />
+                                            <span class="product-description">
+                                                @error('email')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                                <input name="email" value="{{ $employee->email }}"
+                                                    style="background: none; border: none; color:rgb(102, 107, 111)" />
+                                            </span>
+                                        </div>
+                                        <div class="d-flex justify-content-around p-1 gap-5">
+                                            <button type="submit" class="buttonEdit">
+                                                <span>Edit</span>
+                                            </button>
+                                    </form>
+                                    <form action="{{ route('user.delete', ['id' => $employee->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="buttonDelete">
+                                            <span>Delete</span>
                                         </button>
-                                </form>
-                                <form action="{{ route('user.delete', ['id' => $employee->id]) }}" method="POST">
-                                  @csrf
-                                  @method('DELETE')
-                                    <button class="buttonDelete">
-                                        <span>Delete</span>
-                                    </button>
-                                </form>
+                                    </form>
+                    </div>
+
+
+                    </li>
+                    @endforeach
+
+                    </ul>
                 </div>
 
+                <div class="mt-3">
 
-                </li>
-                @endforeach
+                    <div class="box box-widget widget-user-2">
+                        <div class="widget-user-header bg-yellow">
+                            <h3> Commandes suggestées ({{ $data['totalCommande'] }})</h3>
+                        </div>
+                        <ul class="products-list product-list-in-box">
+                            @foreach ($commandes as $commande)
+                                <li class="item">
+                                    <form action="{{ route('commande.approuve', ['id' => $commande->id]) }}" method="POST">
+                                        @csrf
+                                        @method('put')
+                                        <div class="product-img"> <img
+                                                src="{{ asset('storage/images/medicines/' . $commande->medicine->image) }}"
+                                                alt="Product Image">
+                                        </div>
+                                        <div class="product-info w-9">
+                                            
+                                            <h5 class="product-title"  style="background: none; border: none; color:rgb(21, 64, 94)"> {{ $commande->medicine->name }}
+                                            </h5>
+                                            <span class="product-description d-flex ">
+                                                <h6 style="background: none; border: none; color:rgb(102, 107, 111)">{{ $commande->number }} pièces</h6>
+                                                <h6 style="background: none; border: none; color:rgb(102, 107, 111); padding-left:7rem">{{ $commande->number * $commande->medicine->price }} DH</h6>
+                                            </span>
+                                        </div>
+                                        <div class="d-flex justify-content-around p-1 gap-5">
+                                            <button type="submit" class="buttonEdit">
+                                                <span>Approuve</span>
+                                            </button>
+                                    </form>
+                                    <form action="{{ route('commande.delete', ['id' => $commande->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="buttonDelete">
+                                            <span>Decline</span>
+                                        </button>
+                                    </form>
+                    </div>
 
-                </ul>
+
+                    </li>
+                    @endforeach
+
+                    </ul>
+                </div>
             </div>
             <!-- /.widget-user -->
         </div>

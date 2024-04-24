@@ -29,14 +29,7 @@ class viewsController extends Controller
         $medicines = Medicine::orderBy('created_at', 'desc')->get();
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        $data = [
-            'totalMedicines' => Medicine::count(),
-            'totalCategories' => Category::count(),
-            'totalPharmacies' => Pharmacie::count(),
-            'totalUsers' => User::count(),
-        ];
-
-
+       
         return view('Moderateur.medicineUser', [
             'me' => $me,
             'role' => $role,
@@ -50,15 +43,15 @@ class viewsController extends Controller
             DB::raw('DATE(created_at) as date'),
             DB::raw('COUNT(*) as pharma_count')
         )
-        ->groupBy('date')
-        ->get();
+            ->groupBy('date')
+            ->get();
 
         $medicineStatistics = medicine::select(
             DB::raw('DATE(created_at) as date'),
             DB::raw('COUNT(*) as medicine_count')
         )
-        ->groupBy('date')
-        ->get();
+            ->groupBy('date')
+            ->get();
 
         $categories = Category::paginate(2, ['*'], 'category');
         $Users = User::paginate(2, ['*'], 'users');
@@ -101,6 +94,7 @@ class viewsController extends Controller
             'totalCategories' => Category::count(),
             'totalPharmacies' => Pharmacie::count(),
             'totalUsers' => User::where('pharmacie_id', $me->pharmacie_id)->count(),
+            'totalCommande' => Commande::where('accepted',false)->where('pharmacie_id', $me->pharmacie_id)->count(),
         ];
 
         $capitale = Capitale::where('pharmacie_id', $me->pharmacie_id)->get();
@@ -109,12 +103,14 @@ class viewsController extends Controller
             DB::raw('DATE(created_at) as date'),
             DB::raw('COUNT(*) as stock_count')
         )
-        ->groupBy('date')
-        ->where('pharmacie_id', $me->pharmacie_id)
-        ->get();
-        
-        $employees = User::where('pharmacie_id', $me->pharmacie_id )->orderBy('created_at', 'asc')->paginate(4, ['*'], 'users');
+            ->groupBy('date')
+            ->where('pharmacie_id', $me->pharmacie_id)
+            ->get();
 
+            $employees = User::where('pharmacie_id', $me->pharmacie_id)->orderBy('created_at', 'asc')->paginate(4, ['*'], 'users');
+            $commandes = Commande::with('medicine')->where('pharmacie_id', $me->pharmacie_id)->where('accepted',false)->orderBy('created_at', 'asc')->paginate(4, ['*'], 'commandes');
+
+            // dd($commandes);
         return view('Moderateur.moderateurDash', [
             'me' => $me,
             'role' => $role,
@@ -125,7 +121,8 @@ class viewsController extends Controller
             'Medicines' => $Medicines,
             'stockStatistics' => $stockStatistics,
             'employees' => $employees,
-            'capitale' => $capitale
+            'capitale' => $capitale,
+            'commandes' => $commandes
         ]);
     }
 
@@ -142,7 +139,11 @@ class viewsController extends Controller
     {
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        return view('Admin.addUser', ['me' => $me, 'role' => $role]);
+        if ($me->role_id === '1') {
+            return view('Admin.addUser', ['me' => $me, 'role' => $role]);
+        } else {
+            return view('Moderateur.addUserM', ['me' => $me, 'role' => $role]);
+        }
     }
 
     public function addCategoryView()
@@ -166,20 +167,20 @@ class viewsController extends Controller
             ->get();
 
         $stockTotals = [];
-        if($stocks){
+        if ($stocks) {
             foreach ($stocks as $stock) {
                 $stockTotals[$stock->medicament_id] = $stock->total_number ?? 0;
             }
         }
 
         // dd($stockTotals);
-        
+
 
         return view('Moderateur.medicineUser', [
             'me' => $me,
             'role' => $role,
             'medicines' => $medicines,
-            'stockTotals' => $stockTotals,         
+            'stockTotals' => $stockTotals,
         ]);
     }
 
@@ -195,8 +196,8 @@ class viewsController extends Controller
         $medicines = Medicine::with('category')->orderBy('created_at', 'desc')->get();
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        
-        
+
+
         // $categories = Category::all();
 
         return view('Moderateur.addCommande', [
@@ -211,7 +212,7 @@ class viewsController extends Controller
         $commandes = Commande::orderBy('created_at', 'desc')->where('accepted', false)->get();
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        
+
         // dd($commandes);
         // $categories = Category::all();
 
@@ -219,6 +220,16 @@ class viewsController extends Controller
             'me' => $me,
             'role' => $role,
             'commandes' => $commandes
+        ]);
+    }
+
+    public function showMedicine($id)
+    {
+        $medicine = Medicine::findOrFail($id);
+        $relatedMedicines = Medicine::with('category')->where('category_id',$medicine->category_id)->get();
+           return view('Guest.detailsMedicine', [
+            'medicine' => $medicine,
+            'relatedMedicines' => $relatedMedicines
         ]);
     }
 }

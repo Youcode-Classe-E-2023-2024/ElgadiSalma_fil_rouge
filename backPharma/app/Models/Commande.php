@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Medicine;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Commande extends Model
 {
@@ -22,4 +23,9 @@ class Commande extends Model
     ];
 
     protected $table = 'commande';
+
+    public function medicine()
+    {
+        return $this->belongsTo(Medicine::class, 'medicament_id');
+    }
 }
