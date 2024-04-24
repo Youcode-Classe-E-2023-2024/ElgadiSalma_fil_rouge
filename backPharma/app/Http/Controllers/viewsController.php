@@ -17,6 +17,18 @@ use Illuminate\Support\Facades\Auth;
 
 class viewsController extends Controller
 {
+
+    public function homePage()
+    {
+        $pharmacies = Pharmacie::with('city')->get();
+        $categories = Category::all();
+        return view('Guest.homePage', 
+        [
+            'categories' => $categories,
+            'pharmacies' => $pharmacies
+        ]);
+    }
+
     public function medicineList()
     {
         $medicines = Medicine::orderBy('created_at', 'desc')->get();
