@@ -21,9 +21,7 @@ use App\Http\Controllers\medicamentController;
 |
 */
 
-Route::get('/', function () {
-    return view('Guest.homePage');
-})->name('homePage');
+Route::get('/',[viewsController::class, 'homePage'])->name('homePage');
 
 
 /*
