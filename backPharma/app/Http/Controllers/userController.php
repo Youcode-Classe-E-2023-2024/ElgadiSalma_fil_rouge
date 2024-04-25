@@ -29,9 +29,9 @@ class UserController extends Controller
         $imageFullName = $imageName . '_' . time() . '.' . $imageExtension;
 
         $image->storeAs('images/users', $imageFullName, 'public');
-        
+
         $user = Auth::user();
-        
+
         if ($user->role_id == '1') {
             User::create([
                 'name' => $request->name,
@@ -107,14 +107,19 @@ class UserController extends Controller
         }
 
         if ($editedUser->role_id == '2') {
-            if ($user->role_id != '1') {
+            if ($user->role_id = '3') {
                 return redirect()->back()->withErrors(["la permission denied"]);
+            } else {
+                $editedUser->name = $request->input('name');
+                $editedUser->email = $request->input('email');
+                $editedUser->save();
             }
         } elseif ($editedUser->role_id == '3') {
-            if ($user->role_id != '3') {
+            if ($user->role_id != '2') {
                 return redirect()->back()->withErrors(["Permission denied"]);
             }
         }
+
 
         $editedUser->name = $request->input('name');
         $editedUser->email = $request->input('email');
