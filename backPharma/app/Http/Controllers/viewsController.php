@@ -22,11 +22,13 @@ class viewsController extends Controller
     {
         $pharmacies = Pharmacie::with('city')->get();
         $categories = Category::all();
-        return view('Guest.homePage', 
-        [
-            'categories' => $categories,
-            'pharmacies' => $pharmacies
-        ]);
+        return view(
+            'Guest.homePage',
+            [
+                'categories' => $categories,
+                'pharmacies' => $pharmacies
+            ]
+        );
     }
 
     public function medicineList()
@@ -41,7 +43,7 @@ class viewsController extends Controller
         $medicines = Medicine::orderBy('created_at', 'desc')->get();
         $me = Auth::user();
         $role = Role::find($me->role_id);
-       
+
         return view('Moderateur.medicineUser', [
             'me' => $me,
             'role' => $role,
@@ -106,7 +108,7 @@ class viewsController extends Controller
             'totalCategories' => Category::count(),
             'totalPharmacies' => Pharmacie::count(),
             'totalUsers' => User::where('pharmacie_id', $me->pharmacie_id)->count(),
-            'totalCommande' => Commande::where('accepted',false)->where('pharmacie_id', $me->pharmacie_id)->count(),
+            'totalCommande' => Commande::where('accepted', false)->where('pharmacie_id', $me->pharmacie_id)->count(),
         ];
 
         $capitale = Capitale::where('pharmacie_id', $me->pharmacie_id)->get();
@@ -119,10 +121,10 @@ class viewsController extends Controller
             ->where('pharmacie_id', $me->pharmacie_id)
             ->get();
 
-            $employees = User::where('pharmacie_id', $me->pharmacie_id)->orderBy('created_at', 'asc')->paginate(4, ['*'], 'users');
-            $commandes = Commande::with('medicine')->where('pharmacie_id', $me->pharmacie_id)->where('accepted',false)->orderBy('created_at', 'asc')->paginate(4, ['*'], 'commandes');
+        $employees = User::where('pharmacie_id', $me->pharmacie_id)->orderBy('created_at', 'asc')->paginate(4, ['*'], 'users');
+        $commandes = Commande::with('medicine')->where('pharmacie_id', $me->pharmacie_id)->where('accepted', false)->orderBy('created_at', 'asc')->paginate(4, ['*'], 'commandes');
 
-            // dd($commandes);
+        // dd($commandes);
         return view('Moderateur.moderateurDash', [
             'me' => $me,
             'role' => $role,
@@ -151,11 +153,8 @@ class viewsController extends Controller
     {
         $me = Auth::user();
         $role = Role::find($me->role_id);
-        if ($me->role_id === '1') {
-            return view('Admin.addUser', ['me' => $me, 'role' => $role]);
-        } else {
-            return view('Moderateur.addUserM', ['me' => $me, 'role' => $role]);
-        }
+
+        return view('Moderateur.addUserM', ['me' => $me, 'role' => $role]);
     }
 
     public function addCategoryView()
@@ -219,29 +218,21 @@ class viewsController extends Controller
         ]);
     }
 
-    public function approuveView()
-    {
-        $commandes = Commande::orderBy('created_at', 'desc')->where('accepted', false)->get();
-        $me = Auth::user();
-        $role = Role::find($me->role_id);
-
-        // dd($commandes);
-        // $categories = Category::all();
-
-        return view('Moderateur.approuvemets', [
-            'me' => $me,
-            'role' => $role,
-            'commandes' => $commandes
-        ]);
-    }
-
     public function showMedicine($id)
     {
         $medicine = Medicine::findOrFail($id);
-        $relatedMedicines = Medicine::with('category')->where('category_id',$medicine->category_id)->get();
-           return view('Guest.detailsMedicine', [
+        $relatedMedicines = Medicine::with('category')->where('category_id', $medicine->category_id)->get();
+        return view('Guest.detailsMedicine', [
             'medicine' => $medicine,
             'relatedMedicines' => $relatedMedicines
         ]);
+    }
+
+    public function addUserViewAdmin()
+    {
+        $me = Auth::user();
+        $role = Role::find($me->role_id);
+
+        return view('Admin.addUser', ['me' => $me, 'role' => $role]);
     }
 }
