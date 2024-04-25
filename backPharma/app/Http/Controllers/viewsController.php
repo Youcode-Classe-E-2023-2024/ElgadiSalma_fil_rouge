@@ -31,7 +31,7 @@ class viewsController extends Controller
         );
     }
 
-    public function medicineList()
+    public function medicineListe()
     {
         $medicines = Medicine::orderBy('created_at', 'desc')->get();
         return view('Guest.medicineList', ['medicines' => $medicines]);

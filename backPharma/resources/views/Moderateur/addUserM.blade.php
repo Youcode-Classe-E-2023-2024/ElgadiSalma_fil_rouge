@@ -1,5 +1,14 @@
 @extends('Moderateur.moderateurLayout')
 @section('moderateurContent')
+<div class="content-header sty-one">
+    <h1>Users</h1>
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><i class="fa fa-angle-right"></i> Dashboard 4</li>
+    </ol>
+</div>
+
+
     <div class="d-flex justify-content-center">
         <div class="col-md-8">
             <div class="card-body">

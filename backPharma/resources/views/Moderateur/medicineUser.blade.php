@@ -1,31 +1,12 @@
 @extends('Moderateur.moderateurLayout')
 @section('moderateurContent')
-    {{-- @if (session('error'))
-    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="errorModalLabel">Erreur</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ session('error') }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        $(document).ready(function(){
-            $('#errorModal').modal('show');
-        });
-    </script>
-@endif --}}
+<div class="content-header sty-one">
+    <h1>Ventes</h1>
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><i class="fa fa-angle-right"></i> Dashboard </li>
+    </ol>
+</div>
 
     <div class="cards">
         @foreach ($medicines as $medicine)
