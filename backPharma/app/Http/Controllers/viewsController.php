@@ -67,9 +67,9 @@ class viewsController extends Controller
             ->groupBy('date')
             ->get();
 
-        $categories = Category::paginate(2, ['*'], 'category');
-        $Users = User::paginate(2, ['*'], 'users');
-        $Pharmacies = Pharmacie::paginate(2, ['*'], 'pharmacies');
+        $categories = Category::orderBy('created_at', 'desc')->paginate(2, ['*'], 'categories');
+        $Users = User::orderBy('created_at', 'desc')->where('role_id','2')->paginate(2, ['*'], 'users');
+        $Pharmacies = Pharmacie::orderBy('created_at', 'desc')->paginate(2, ['*'], 'pharmacies');
         $Medicines = Medicine::all();
         $me = Auth::user();
         $role = Role::find($me->role_id);
