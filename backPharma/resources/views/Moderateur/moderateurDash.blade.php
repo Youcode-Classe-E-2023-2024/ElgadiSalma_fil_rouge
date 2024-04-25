@@ -175,7 +175,7 @@
                                     </form>
                                     <form action="{{ route('user.delete', ['id' => $employee->id]) }}" method="POST">
                                         @csrf
-                                        @method('DELETE')
+                                        @method('delete')
                                         <button class="buttonDelete">
                                             <span>Delete</span>
                                         </button>
