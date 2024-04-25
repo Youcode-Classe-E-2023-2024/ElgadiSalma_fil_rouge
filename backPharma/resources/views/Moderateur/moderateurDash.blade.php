@@ -1,5 +1,26 @@
 @extends('Moderateur.moderateurLayout')
 @section('moderateurContent')
+<div class="content-header d-flex justify-content-between">
+    <h1>Dashboard </h1>
+    <ol class="">
+        <form action="{{ route('addToStock')}}" method="POST">
+        @csrf
+        <button class="botonaa" type="submit">
+            <strong>Add To Stock</strong>
+            <div id="container-stars">
+              <div id="stars"></div>
+            </div>
+          
+            <div id="glow">
+              <div class="circle"></div>
+              <div class="circle"></div>
+            </div>
+          </button>
+        </form>
+    </ol>
+</div>
+
+
     <!-- Main content -->
     <div class="content">
         <!-- Small boxes (Stat box) -->
