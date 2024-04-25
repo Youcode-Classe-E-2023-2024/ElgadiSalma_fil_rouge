@@ -9,13 +9,209 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 
     <!-- v4.0.0-alpha.6 -->
-    <link rel="stylesheet" href="assets-dashboard/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard/bootstrap/css/bootstrap.min.css') }}">
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
     <style>
+        .card {
+            overflow: visible;
+            width: 17rem;
+            height: 20rem;
+        }
+
+        .cards {
+            margin: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5rem;
+            justify-content: center;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 300ms;
+            box-shadow: 0px 0px 10px 1px #000000ee;
+            border-radius: 5px;
+        }
+
+        .front,
+        .back {
+            background-color: #151515;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .back {
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .back-content {
+            position: absolute;
+            width: 99%;
+            height: 99%;
+            background-color: #151515;
+            border-radius: 5px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .card:hover .content {
+            transform: rotateY(180deg);
+        }
+
+        @keyframes rotation_481 {
+            0% {
+                transform: rotateZ(0deg);
+            }
+
+            0% {
+                transform: rotateZ(360deg);
+            }
+        }
+
+        .front {
+            transform: rotateY(180deg);
+            color: white;
+        }
+
+        .front .front-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .front-content .badge {
+            background-color: #00000055;
+            padding: 2px 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(2px);
+            width: fit-content;
+        }
+
+        .description {
+            box-shadow: 0px 0px 10px 5px #00000088;
+            width: 100%;
+            padding: 10px;
+            background-color: #00000099;
+            backdrop-filter: blur(5px);
+            border-radius: 5px;
+        }
+
+        .title {
+            font-size: 11px;
+            max-width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .title p {
+            width: 50%;
+        }
+
+        .card-footer {
+            /* color: transparent; */
+            margin-top: 5px;
+            font-size: 8px;
+        }
+
+        .input {
+            max-width: 190px;
+            width: 40px;
+            height: 40px;
+            outline: none;
+            margin: 5px;
+            transition: .5s;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            transform: rotate(90deg);
+        }
+
+        input:focus {
+            width: 150px;
+            transform: rotate(0);
+        }
+
+        .front .img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-color: #ffbb66;
+            position: relative;
+            filter: blur(15px);
+            animation: floating 2600ms infinite linear;
+        }
+
+        #bottom {
+            background-color: #ff8866;
+            left: 50px;
+            top: 0px;
+            width: 150px;
+            height: 150px;
+            animation-delay: -800ms;
+        }
+
+        #right {
+            background-color: #ff2233;
+            left: 160px;
+            top: -80px;
+            width: 30px;
+            height: 30px;
+            animation-delay: -1800ms;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+
+
+
         .buttonD {
             all: unset;
             display: flex;
@@ -374,15 +570,14 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="assets-dashboard/css/style.css">
-    <link rel="stylesheet" href="assets-dashboard/css/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets-dashboard/css/et-line-font/et-line-font.css">
-    <link rel="stylesheet" href="assets-dashboard/css/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="assets-dashboard/plugins/hmenu/ace-responsive-menu.css">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard/css/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard/css/et-line-font/et-line-font.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard/css/themify-icons/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard/plugins/hmenu/ace-responsive-menu.css') }}">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-
 
 </head>
 
@@ -459,6 +654,10 @@
                     <li><a href="/addCategory"><i class="fa fa-edit"></i> <span>Category</span></a>
                     </li>
 
+                    <li><a href="/medicineList"><i class="fa fa-dashboard"></i> <span>Liste de medicament</span></a>
+
+                    </li>
+
                 </ul>
             </nav>
         </div>
@@ -494,28 +693,23 @@
         <!-- ./wrapper -->
 
         <!-- jQuery 3 -->
-        <script src="assets-dashboard/js/jquery.min.js"></script>
+        <script src="{{ asset('assets-dashboard/js/jquery.min.js') }}"></script>
 
         <!-- v4.0.0-alpha.6 -->
-        <script src="assets-dashboard/bootstrap/js/bootstrap.min.js"></script>
+        <script src="{{ asset('assets-dashboard/bootstrap/js/bootstrap.min.js') }}"></script>
 
         <!-- template -->
-        <script src="assets-dashboard/js/niche.js"></script>
+        <script src="{{ asset('assets-dashboard/js/niche.js') }}"></script>
 
         <!-- Morris JavaScript -->
-        <script src="assets-dashboard/plugins/raphael/raphael-min.js"></script>
-        <script src="assets-dashboard/plugins/morris/morris.js"></script>
-        <script src="assets-dashboard/plugins/functions/dashboard1.js"></script>
-        <script src="assets-dashboard/plugins/hmenu/ace-responsive-menu.js" type="text/javascript"></script>
+        <script src="{{ asset('assets-dashboard/plugins/raphael/raphael-min.js') }}"></script>
+        <script src="{{ asset('assets-dashboard/plugins/morris/morris.js') }}"></script>
+        <script src="{{ asset('assets-dashboard/plugins/functions/dashboard1.js') }}"></script>
+        <script src="{{ asset('assets-dashboard/plugins/hmenu/ace-responsive-menu.js') }}" type="text/javascript">
+        </script>
         <!--Plugin Initialization-->
         <script type="text/javascript">
-            $(document).ready(function() {
-                $("#respMenu").aceResponsiveMenu({
-                    resizeWidth: '768', // Set the same in Media query       
-                    animationSpeed: 'fast', //slow, medium, fast
-                    accoridonExpAll: false //Expands all the accordion menu on click
-                });
-            });
+            // Votre script JavaScript ici
         </script>
 </body>
 
