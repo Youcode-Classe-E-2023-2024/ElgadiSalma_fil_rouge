@@ -130,10 +130,17 @@ class MedicamentController extends Controller
         }
     
         $categories = Category::all();
-        $me = Auth::user();
     
         $medicines = Medicine::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($query) . '%'])->get();
     
+        return view('Guest.medicineList', compact('medicines', 'categories'));
+    }
+
+    public function filterMedicine($id)
+    {
+        $medicines = Medicine::where('category_id', $id)->get();
+        $categories = Category::all();
+
         return view('Guest.medicineList', compact('medicines', 'categories'));
     }
     

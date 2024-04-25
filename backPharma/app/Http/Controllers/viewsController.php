@@ -33,8 +33,9 @@ class viewsController extends Controller
 
     public function medicineListe()
     {
+        $categories = Category::all();
         $medicines = Medicine::orderBy('created_at', 'desc')->get();
-        return view('Guest.medicineList', ['medicines' => $medicines]);
+        return view('Guest.medicineList', ['medicines' => $medicines, 'categories' => $categories]);
     }
 
     public function medicineUser()

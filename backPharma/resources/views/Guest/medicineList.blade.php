@@ -11,9 +11,9 @@
                     <div class="col-lg-12">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Department</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"> Grid 3 Column</li>
+                                @foreach ($categories as $category)
+                                    <li class="breadcrumb-item"><a href="{{ route('medicine.filter', ['id' => $category->id]) }}">{{ $category->name }}</a></li>
+                                @endforeach
                             </ol>
                         </nav>
                     </div>
@@ -40,12 +40,14 @@
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="department_gd_inner">
                                 <div class="image">
-                                    <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}" style="width: 16rem; height:17rem; display:flex; justify-content:center" class="img-fluid" alt="img" />
+                                    <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}"
+                                        style="width: 16rem; height:17rem; display:flex; justify-content:center"
+                                        class="img-fluid" alt="img" />
                                 </div>
                                 <div class="dp_content">
                                     <h2><a href="#">{{ $medicine->name }}</a></h2>
                                     <p>{{ $medicine->price }} DH</p>
-                                    
+
                                     <a href="medicine/{{ $medicine->id }}" class="read_">Read more</a>
                                 </div>
                             </div>

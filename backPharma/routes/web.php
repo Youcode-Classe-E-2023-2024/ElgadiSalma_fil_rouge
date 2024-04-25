@@ -31,6 +31,9 @@ Route::get('/about-us', function () {
 
 Route::get('/medicine/{id}', [viewsController::class, 'showMedicine'])->name('medicine.show');
 
+// filter
+Route::get('/medicament/{id}', [medicamentController::class, 'filterMedicine'])->name('medicine.filter');
+
 
 /*
 |--------------------------------------------------------------------------
