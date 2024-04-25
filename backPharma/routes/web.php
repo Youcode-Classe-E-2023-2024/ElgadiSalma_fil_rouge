@@ -79,7 +79,7 @@ Route::middleware(['auth.check'])->group(function () {
 
         Route::get('/dashboard', [viewsController::class, 'adminDashboard'])->name('adminDashboard');
 
-        Route::get('/addUser', [viewsController::class, 'addUserViewAdmin'])->name('addUserViewAdmin');
+        Route::get('/User', [viewsController::class, 'addUserViewAdmin'])->name('addUserViewAdmin');
 
         Route::get('/addCategory', [viewsController::class, 'addCategoryView'])->name('addCategoryView');
 
@@ -110,6 +110,8 @@ Route::middleware(['auth.check'])->group(function () {
     });
 
 
+    Route::middleware('role:Administrateur|Moderateur')->group(function () {
+        
 
         /*
         |--------------------------------------------------------------------------
@@ -120,7 +122,7 @@ Route::middleware(['auth.check'])->group(function () {
         Route::put('/users/{id}', [userController::class, 'editUser'])->name('user.edit');
         Route::delete('/users/{id}', [userController::class, 'deleteUser'])->name('user.delete');
 
-
+    });
 
 
     Route::middleware('role:Utilisateur|Moderateur')->group(function () {
