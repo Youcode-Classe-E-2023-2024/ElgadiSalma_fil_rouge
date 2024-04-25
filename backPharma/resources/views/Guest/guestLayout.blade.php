@@ -101,9 +101,10 @@
                                 </a>
                                 <ul class="navbar-nav submenu">
                                     <li>
-                                        <form action="#">
+                                        <form action="{{ route('searchMedicine') }}" method="post">
+                                            @csrf
                                             <div class="form-group">
-                                                <input name="search" type="text" placeholder="Enter a Keywords">
+                                                <input name="query" type="text" placeholder="Enter a Keywords">
                                                 <button type="submit" class="theme-btn">GO</button>
                                             </div>
                                         </form>
