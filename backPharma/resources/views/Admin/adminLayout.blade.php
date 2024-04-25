@@ -16,6 +16,138 @@
     <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 
     <style>
+        .buttonD {
+            all: unset;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0.6em 0.6em;
+            border: red solid 0.15em;
+            border-radius: 0.25em;
+            color: black;
+            font-size: 1.5em;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: border 300ms, color 300ms;
+            user-select: none;
+        }
+
+        .buttonD p {
+            z-index: 1;
+        }
+
+        .buttonD:hover {
+            color: #212121;
+        }
+
+        .buttonD:active {
+            border-color: red;
+        }
+
+        .buttonD::after,
+        .buttonD::before {
+            content: "";
+            position: absolute;
+            width: 9em;
+            aspect-ratio: 1;
+            background: red;
+            opacity: 50%;
+            border-radius: 50%;
+            transition: transform 500ms, background 300ms;
+        }
+
+        .buttonD::before {
+            left: 0;
+            transform: translateX(-8em);
+        }
+
+        .buttonD::after {
+            right: 0;
+            transform: translateX(8em);
+        }
+
+        .buttonD:hover:before {
+            transform: translateX(-1em);
+        }
+
+        .buttonD:hover:after {
+            transform: translateX(1em);
+        }
+
+        .buttonD:active:before,
+        .buttonD:active:after {
+            background: red;
+        }
+
+
+
+        .buttonE {
+            all: unset;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0.6em 0.6em;
+            border: green solid 0.15em;
+            border-radius: 0.25em;
+            color: black;
+            font-size: 1.5em;
+            font-weight: 600;
+            cursor: pointer;
+            overflow: hidden;
+            transition: border 300ms, color 300ms;
+            user-select: none;
+        }
+
+        .buttonE p {
+            z-index: 1;
+        }
+
+        .buttonE:hover {
+            color: #212121;
+        }
+
+        .buttonE:active {
+            border-color: green;
+        }
+
+        .buttonE::after,
+        .buttonE::before {
+            content: "";
+            position: absolute;
+            width: 9em;
+            aspect-ratio: 1;
+            background: green;
+            opacity: 50%;
+            border-radius: 50%;
+            transition: transform 500ms, background 300ms;
+        }
+
+        .buttonE::before {
+            left: 0;
+            transform: translateX(-8em);
+        }
+
+        .buttonE::after {
+            right: 0;
+            transform: translateX(8em);
+        }
+
+        .buttonE:hover:before {
+            transform: translateX(-1em);
+        }
+
+        .buttonE:hover:after {
+            transform: translateX(1em);
+        }
+
+        .buttonE:active:before,
+        .buttonE:active:after {
+            background: green;
+        }
+
+
+
         body {
             background-color: #f9f9fa
         }
@@ -321,7 +453,7 @@
                     <li><a href="/addMedicine"><i class="fa fa-edit"></i> <span>Medicament</span></a>
                     </li>
 
-                    <li><a href="/addUser"><i class="fa fa-edit"></i> <span>Utilisateur</span></a>
+                    <li><a href="/User"><i class="fa fa-edit"></i> <span>Utilisateur</span></a>
                     </li>
 
                     <li><a href="/addCategory"><i class="fa fa-edit"></i> <span>Category</span></a>
