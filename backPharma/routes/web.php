@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\stockController;
 use App\Http\Controllers\venteController;
 use App\Http\Controllers\viewsController;
 use App\Http\Controllers\pharmaController;
@@ -18,6 +19,10 @@ use App\Http\Controllers\medicamentController;
 */
 
 Route::get('/',[viewsController::class, 'homePage'])->name('homePage');
+
+Route::get('/medicament', [viewsController::class, 'medicineListe'])->name('medicineList');
+
+Route::post('/searchMedicine', [medicamentController::class, 'search'])->name('searchMedicine');
 
 
 Route::get('/about-us', function () {
@@ -73,8 +78,6 @@ Route::middleware(['auth.check'])->group(function () {
         |--------------------------------------------------------------------------
         */
 
-        Route::get('/medicament', [viewsController::class, 'medicineList'])->name('medicineList');
-
         Route::get('/addMedicine', [viewsController::class, 'addMedicineView'])->name('addMedicineView');
 
         Route::get('/dashboard', [viewsController::class, 'adminDashboard'])->name('adminDashboard');
@@ -115,6 +118,12 @@ Route::middleware(['auth.check'])->group(function () {
 
     Route::middleware('role:Administrateur|Moderateur')->group(function () {
         
+        /*
+        |--------------------------------------------------------------------------
+        | add to stock
+        |--------------------------------------------------------------------------
+        */
+        Route::post('/addToStock', [stockController::class, 'addToStock'])->name('addToStock');
 
         /*
         |--------------------------------------------------------------------------
