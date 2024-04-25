@@ -123,7 +123,8 @@
                                                 <tr>
                                                     <th>Photo</th>
                                                     <th>Name</th>
-                                                    <th>Created At</th>
+                                                    <th>Email</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -140,7 +141,17 @@
                                                             </div>
                                                         </td>
                                                         <td>{{ $user->name }}</td>
-                                                        <td>{{ $user->created_at }}</td>
+                                                        <td>{{ $user->email }}</td>
+                                                        <td class="d-flex gap-2">
+                                                           
+                                                            <form action="{{ route('user.delete', ['id' => $user->id]) }}" method="POST">
+                                                                @csrf
+                                                                @method('delete')
+                                                                    <button type="submit" class="buttonD">
+                                                                        <p></p>
+                                                                    </button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -209,15 +220,33 @@
                                                 <tr>
                                                     <th>ID No.</th>
                                                     <th>Name</th>
-                                                    <th>Created On</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>John ryte</td>
-                                                    <td>53275533</td>
-                                                    <td>14 May 2017</td>
-                                                </tr>
+                                                @foreach ($categories as $category)
+                                                    <tr>
+                                                        <td>{{ $category->id }}</td>
+                                                        <form action="{{ route('category.edit', ['id' => $category->id]) }}" method="POST">
+                                                            @csrf
+                                                            @method('put')
+                                                        <td><input type="text" name="name" placeholder="Category" value="{{ $category->name }}" style="background: none; border: none;"></td>
+                                                        <td class="d-flex gap-2">
+                                                            <button type="submit" class="buttonE">
+                                                                <p></p>
+                                                            </button>
+                                                        </form>
+                                                            <form action="{{ route('category.delete', ['id' => $category->id]) }}" method="POST">
+                                                                @csrf
+                                                                @method('delete')
+                                                                    <button type="submit" class="buttonD">
+                                                                        <p></p>
+                                                                    </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
                                                 <!-- Add more rows if needed -->
                                             </tbody>
                                         </table>
@@ -235,25 +264,17 @@
         <div class="d-flex justify-content-center ">
             <div class="w-100 col-lg-5 m-b-2">
                 <div id="carouselExampleControls3" class="carousel slide" data-ride="carousel">
-                    {{-- <div class="carousel-inner" role="listbox">
-                        @foreach ($Medicines as $medicine)
-                            <div class="carousel-item active"> <img
-                                    src="{{ asset('storage/images/medicines/' . $medicine->image) }}"
-                                    class="img-responsive img-rounded" alt="Medicine Image"></div>
-                        @endforeach
-                    </div> --}}
-
 
                     <div id="default-carousel" class="relative w-full" data-carousel="slide">
                         <!-- Carousel wrapper -->
                         <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                             <!-- Item 1 -->
                             @foreach ($Medicines as $medicine)
-                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                                <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}"
-                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                                    alt="...">
-                            </div>
+                                <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                    <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}"
+                                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                        alt="...">
+                                </div>
                             @endforeach
                         </div>
                         <!-- Slider indicators -->
