@@ -235,4 +235,23 @@ class viewsController extends Controller
 
         return view('Admin.addUser', ['me' => $me, 'role' => $role]);
     }
+
+    public function medicineListAdmin()
+    {
+        $me = Auth::user();
+        $role = Role::find($me->role_id);
+        $medicines = Medicine::all();
+
+        return view('Admin.listAdmin', ['me' => $me, 'role' => $role, 'medicines'=>$medicines]);
+    }
+
+    public function editMedicineView($id)
+    {
+        $me = Auth::user();
+        $role = Role::find($me->role_id);
+        $medicine = Medicine::findOrFail($id);
+        $categories = Category::all();
+
+        return view('Admin.editMedicine', ['me' => $me, 'role' => $role, 'medicine'=>$medicine, 'categories'=> $categories]);
+    }
 }
