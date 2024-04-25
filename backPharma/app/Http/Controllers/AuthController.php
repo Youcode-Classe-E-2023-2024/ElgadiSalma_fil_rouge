@@ -17,18 +17,26 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
     
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
+        if (Auth::attempt($credentials, $request->filled('remember'))) 
+        {
             $request->session()->regenerate();
-            
+    
             $user = Auth::user();
+    
             if($user->role_id == 2 && $user->completed == false) 
             {
                 return redirect()->route('pharmacie.view');
-            } else {
-                return redirect()->route('homePage');
+            } 
+            elseif ($user->role_id == 2 || $user->role_id == 3) 
+            {
+                return redirect()->route('moderateurDashboard');
+            } 
+            elseif ($user->role_id == 1) 
+            {
+                return redirect()->route('adminDashboard');
             }
-        }   
-        
+        }
+    
         return back()->withErrors([
             'email' => 'Invalid email or password',
         ]);
@@ -40,10 +48,10 @@ class AuthController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
- 
-        return redirect()->route('login'); 
+
+        return redirect()->route('login');
     }
-  
+
     /*
     |--------------------------------------------------------------------------
     | Forgot-password
@@ -57,11 +65,10 @@ class AuthController extends Controller
 
         $email = $request->input('email');
         $user = User::where('email', $email)->first();
-        if(!empty($user))
-        {
+        if (!empty($user)) {
             $user->remember_token = Str::random(40);
             $user->save();
-            
+
             Mail::to($user->email)->send(new ForgotPasswordMail($user));
 
             if ($user) {
@@ -69,12 +76,11 @@ class AuthController extends Controller
             } else {
                 return back()->withErrors(['email' => 'Email non trouvé.']);
             }
-        } 
-        else{
+        } else {
             return back()->withErrors([
-                'email'=> 'Email non trouve.'
-                ])->onlyInput('email');
-        }           
+                'email' => 'Email non trouve.'
+            ])->onlyInput('email');
+        }
     }
 
     public function reset(Request $request, $token)
@@ -85,23 +91,21 @@ class AuthController extends Controller
         ]);
 
         // dd($request);
-        
-        $user = User::where('remember_token','=',$token)->first();
-        if(!empty($user))
-        {
-            if($request->password == $request->confirmPassword)
-            {
+
+        $user = User::where('remember_token', '=', $token)->first();
+        if (!empty($user)) {
+            if ($request->password == $request->confirmPassword) {
                 $user->password = Hash::make($request->password);
                 $user->remember_token = Str::random(40);
                 $user->save();
 
-                return redirect()->route('login'); 
-
-            }else{
+                return redirect()->route('login');
+            } else {
                 return back()->withErrors([
-                    'password'=> 'Mots de passe non identiques.'
-                    ])->onlyInput('password');            }
-        }else{
+                    'password' => 'Mots de passe non identiques.'
+                ])->onlyInput('password');
+            }
+        } else {
             abort(404);
         }
     }
@@ -109,7 +113,7 @@ class AuthController extends Controller
     public function resetView($token)
     {
         $user = User::where('remember_token', $token)->first();
-    
+
         if (!empty($user)) {
             // Passer le jeton à la vue
             return view('Authentification.reset-password', ['token' => $token]);
@@ -117,5 +121,4 @@ class AuthController extends Controller
             abort(404);
         }
     }
-    
 }
