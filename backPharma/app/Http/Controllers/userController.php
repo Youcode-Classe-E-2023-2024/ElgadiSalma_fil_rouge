@@ -15,18 +15,23 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg',
             'password' => 'required',
+        ], [
+            'name.required' => 'Veuillez entrer le nom de l\'utilisateur.',
+            'email.required' => 'Veuillez entrer l\'email de l\'utilisateur.',
+            'email.email' => 'L\'email doit être une adresse email valide.',
+            'email.unique' => 'Cet email est déjà utilisé.',
+            'password.required' => 'Veuillez entrer le mot de passe de l\'utilisateur.',
         ]);
 
-        
         $image = $request->file('photo');
         $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
         $imageExtension = $image->getClientOriginalExtension();
         $imageFullName = $imageName . '_' . time() . '.' . $imageExtension;
 
         $image->storeAs('images/users', $imageFullName, 'public');
-
+        
         $user = Auth::user();
-
+        
         if ($user->role_id == '1') {
             User::create([
                 'name' => $request->name,
@@ -40,7 +45,7 @@ class UserController extends Controller
             User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'photo' => $request->photo,
+                'photo' => $imageFullName,
                 'password' => bcrypt($request->password),
                 'role_id' => '3',
                 'pharmacie_id' => $user->pharmacie_id,
@@ -49,8 +54,9 @@ class UserController extends Controller
             return redirect()->back()->withErrors(["You don't have the permission to add someone"]);
         }
 
-        return redirect()->back()->with('success', "Utilisateur supprimé avec succès");
+        return redirect()->back()->with('success', "Utilisateurs ajoutés avec succès");
     }
+
 
     public function deleteUser($id)
     {
@@ -92,14 +98,14 @@ class UserController extends Controller
             'email.email' => 'Veuillez entrer une adresse email valide.',
             'email.unique' => 'Already exist',
         ]);
-    
+
         $user = Auth::user();
         $editedUser = User::find($id);
-    
+
         if (!$editedUser) {
             return redirect()->back()->withErrors(['User not found']);
         }
-    
+
         if ($editedUser->role_id == '2') {
             if ($user->role_id != '1') {
                 return redirect()->back()->withErrors(["la permission denied"]);
@@ -109,12 +115,11 @@ class UserController extends Controller
                 return redirect()->back()->withErrors(["Permission denied"]);
             }
         }
-    
+
         $editedUser->name = $request->input('name');
         $editedUser->email = $request->input('email');
         $editedUser->save();
-    
+
         return redirect()->back()->with('message', 'Utilisateur modifié avec succès');
     }
-    
 }
