@@ -248,6 +248,10 @@
     <link rel="stylesheet" href="assets-dashboard/css/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="assets-dashboard/plugins/hmenu/ace-responsive-menu.css">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -343,8 +347,6 @@
 
 
             @yield('adminContent')
-
-
 
 
 
