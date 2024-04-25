@@ -10,62 +10,22 @@ use App\Http\Controllers\categoryController;
 use App\Http\Controllers\commandeController;
 use App\Http\Controllers\medicamentController;
 
+
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Guest Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
 Route::get('/',[viewsController::class, 'homePage'])->name('homePage');
 
 
-/*
-|--------------------------------------------------------------------------
-| Admin Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/medicament', [viewsController::class, 'medicineList'])->name('medicineList');
-
-Route::get('/addMedicine', [viewsController::class, 'addMedicineView'])->name('addMedicineView');
-
-Route::get('/dashboard', [viewsController::class, 'adminDashboard'])->name('adminDashboard');
-
-Route::get('/addUser', [viewsController::class, 'addUserView'])->name('addUserView');
-
-Route::get('/addCategory', [viewsController::class, 'addCategoryView'])->name('addCategoryView');
-
-
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Moderateur Routes
-|--------------------------------------------------------------------------
-*/
-Route::get('/dashboardM', [viewsController::class, 'moderateurDashboard'])->name('moderateurDashboard');
-
-Route::get('/medicines', [viewsController::class, 'medicineUser'])->name('medicineListUser');
-
-Route::get('/vente', [viewsController::class, 'venteView'])->name('venteView');
-
-Route::get('/pharmaAdd', [viewsController::class, 'pharmaAddView'])->name('pharmacie.view');
-
-Route::get('/commande', [viewsController::class, 'addCommandeView'])->name('addCommandeView');
-
-Route::get('/approuvements', [viewsController::class, 'approuveView'])->name('approuveView');
-
-
-
 Route::get('/about-us', function () {
     return view('Guest.about-us');
 })->name('about-us');
+
+Route::get('/medicine/{id}', [viewsController::class, 'showMedicine'])->name('medicine.show');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -80,14 +40,6 @@ Route::get('/login', function () {
 Route::get('/forgot-password', function () {
     return view('Authentification.forgot-password');
 })->name('forgot-password');
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Authentification
-|--------------------------------------------------------------------------
-*/
 
 
 /*
@@ -110,70 +62,130 @@ Route::post('/reset-password/{token}', [AuthController::class, 'reset'])->name('
 Route::get('/reset-password/{token}', [AuthController::class, 'resetView'])->name('password.reset_view');
 
 
-Route::get('helloworld', [AuthController::class, 'index']);
+
+Route::middleware(['auth.check'])->group(function () {
 
 
-/*
-|--------------------------------------------------------------------------
-| CRUD medicament
-|--------------------------------------------------------------------------
-*/
-Route::post('/medicine', [medicamentController::class, 'addMedicine'])->name('medicine.add');
-Route::put('/medicine/{id}', [medicamentController::class, 'editMedicine'])->name('medicine.edit');
-Route::delete('/medicine/{id}', [medicamentController::class, 'deleteMedicine'])->name('medicine.delete');
-Route::get('/medicine/{id}', [viewsController::class, 'showMedicine'])->name('medicine.show');
+    Route::middleware('role:Administrateur')->group(function () {
+        /*
+        |--------------------------------------------------------------------------
+        | Admin Routes
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/medicament', [viewsController::class, 'medicineList'])->name('medicineList');
+
+        Route::get('/addMedicine', [viewsController::class, 'addMedicineView'])->name('addMedicineView');
+
+        Route::get('/dashboard', [viewsController::class, 'adminDashboard'])->name('adminDashboard');
+
+        Route::get('/addUser', [viewsController::class, 'addUserViewAdmin'])->name('addUserViewAdmin');
+
+        Route::get('/addCategory', [viewsController::class, 'addCategoryView'])->name('addCategoryView');
 
 
-/*
-|--------------------------------------------------------------------------
-| CRUD category
-|--------------------------------------------------------------------------
-*/
-Route::post('/category', [categoryController::class, 'addCategory'])->name('category.add');
-Route::put('/category/{id}', [categoryController::class, 'editCategory'])->name('category.edit');
-Route::delete('/category/{id}', [categoryController::class, 'deleteCategory'])->name('category.delete');
+        
+
+        /*
+        |--------------------------------------------------------------------------
+        | CRUD medicament
+        |--------------------------------------------------------------------------
+        */
+        Route::post('/medicine', [medicamentController::class, 'addMedicine'])->name('medicine.add');
+        Route::put('/medicine/{id}', [medicamentController::class, 'editMedicine'])->name('medicine.edit');
+        Route::delete('/medicine/{id}', [medicamentController::class, 'deleteMedicine'])->name('medicine.delete');
 
 
-/*
-|--------------------------------------------------------------------------
-| CRUD users
-|--------------------------------------------------------------------------
-*/
-Route::post('/users', [userController::class, 'addUser'])->name('user.add');
-Route::put('/users/{id}', [userController::class, 'editUser'])->name('user.edit');
-Route::delete('/users/{id}', [userController::class, 'deleteUser'])->name('user.delete');
+        /*
+        |--------------------------------------------------------------------------
+        | CRUD category
+        |--------------------------------------------------------------------------
+        */
+        Route::post('/category', [categoryController::class, 'addCategory'])->name('category.add');
+        Route::put('/category/{id}', [categoryController::class, 'editCategory'])->name('category.edit');
+        Route::delete('/category/{id}', [categoryController::class, 'deleteCategory'])->name('category.delete');
 
 
-/*
-|--------------------------------------------------------------------------
-| pharma infos
-|--------------------------------------------------------------------------
-*/
-Route::post('/pharmaInfos', [pharmaController::class, 'addPharma'])->name('pharma.add');
+
+    });
 
 
-/*
-|--------------------------------------------------------------------------
-| CRD commande
-|--------------------------------------------------------------------------
-*/
-Route::post('/commande', [commandeController::class, 'addCommande'])->name('commande.add');
-Route::delete('/commande/{id}', [commandeController::class, 'deleteCommande'])->name('commande.delete');
+
+        /*
+        |--------------------------------------------------------------------------
+        | CRUD users
+        |--------------------------------------------------------------------------
+        */
+        Route::post('/users', [userController::class, 'addUser'])->name('user.add');
+        Route::put('/users/{id}', [userController::class, 'editUser'])->name('user.edit');
+        Route::delete('/users/{id}', [userController::class, 'deleteUser'])->name('user.delete');
 
 
-/*
-|--------------------------------------------------------------------------
-| approuve or decline commande
-|--------------------------------------------------------------------------
-*/
-Route::put('/commande/{id}', [commandeController::class, 'approuveCommande'])->name('commande.approuve');
-// Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
 
 
-/*
-|--------------------------------------------------------------------------
-| buy medicine
-|--------------------------------------------------------------------------
-*/
-Route::put('/buyMedicine/{id}', [venteController::class, 'buyMedicine'])->name('medicine.buy');
-// Route::delete('/commande/{id}', [commandeController::class, 'declineCommande']);
+    Route::middleware('role:Utilisateur|Moderateur')->group(function () {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Moderateur Routes
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/dashboardM', [viewsController::class, 'moderateurDashboard'])->name('moderateurDashboard');
+
+        Route::get('/medicines', [viewsController::class, 'medicineUser'])->name('medicineListUser');
+
+        Route::get('/vente', [viewsController::class, 'venteView'])->name('venteView');
+
+        Route::get('/commande', [viewsController::class, 'addCommandeView'])->name('addCommandeView');
+
+        Route::get('/addUser', [viewsController::class, 'addUserView'])->name('addUserView');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CRD commande
+        |--------------------------------------------------------------------------
+        */
+        Route::post('/commande', [commandeController::class, 'addCommande'])->name('commande.add');
+        Route::delete('/commande/{id}', [commandeController::class, 'deleteCommande'])->name('commande.delete');
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | buy medicine
+        |--------------------------------------------------------------------------
+        */
+        Route::put('/buyMedicine/{id}', [venteController::class, 'buyMedicine'])->name('medicine.buy');
+
+        
+    });
+
+    
+
+
+    Route::middleware('role:Moderateur')->group(function () {
+        
+        /*
+        |--------------------------------------------------------------------------
+        | pharma infos
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/pharmaAdd', [viewsController::class, 'pharmaAddView'])->name('pharmacie.view');
+
+        Route::post('/pharmaInfos', [pharmaController::class, 'addPharma'])->name('pharma.add');
+
+
+        
+        /*
+        |--------------------------------------------------------------------------
+        | approuve or decline commande
+        |--------------------------------------------------------------------------
+        */
+        Route::put('/commande/{id}', [commandeController::class, 'approuveCommande'])->name('commande.approuve');
+
+
+
+    });
+
+});
