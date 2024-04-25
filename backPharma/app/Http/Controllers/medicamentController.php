@@ -65,31 +65,48 @@ class MedicamentController extends Controller
     public function editMedicine(Request $request, $id)
     {
         $medicine = Medicine::find($id);
-
         $request->validate([
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
             'category' => 'required',
-            'expiration' => 'required|date',
-            'image' => 'required',
+            'expiration' => 'required',
+            'image' => 'required|image', 
+        ], [
+            'name.required' => 'Veuillez entrer le nom',
+            'description.required' => 'Veuillez entrer la description',
+            'price.required' => 'Veuillez entrer le prix',
+            'category.required' => 'Veuillez sélectionner une catégorie',
+            'expiration.required' => 'Veuillez sélectionner une date d\'expiration',
+            'image.required' => 'Veuillez télécharger une image',
+            'image.image' => 'Le fichier téléchargé doit être une image',
         ]);
 
         if (!$medicine) {
             return redirect()->back()->with('error', "Médicament non trouvé");
         }
+    
+        
+        $image = $request->file('image');
+        $imageName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+        $imageExtension = $image->getClientOriginalExtension();
+        $imageFullName = $imageName . '_' . time() . '.' . $imageExtension;
+
+        $image->storeAs('images/medicines', $imageFullName, 'public');
+
 
         $medicine->name = $request->input('name');
         $medicine->description = $request->input('description');
         $medicine->price = $request->input('price');
-        $medicine->image = $request->input('image');
+        $medicine->image = $imageFullName;
         $medicine->category_id = $request->input('category');
         $medicine->expiration = $request->input('expiration');
-
+    
         $medicine->save();
-
+    
         return redirect()->back()->with('success', "Médicament mis à jour avec succès");
     }
+    
 
     public function deleteMedicine($id)
     {

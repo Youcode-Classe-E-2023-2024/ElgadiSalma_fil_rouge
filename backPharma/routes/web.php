@@ -83,6 +83,8 @@ Route::middleware(['auth.check'])->group(function () {
 
         Route::get('/addCategory', [viewsController::class, 'addCategoryView'])->name('addCategoryView');
 
+        Route::get('/medicineList', [viewsController::class, 'medicineListAdmin'])->name('medicineListAdmin');
+
 
         
 
@@ -93,6 +95,7 @@ Route::middleware(['auth.check'])->group(function () {
         */
         Route::post('/medicine', [medicamentController::class, 'addMedicine'])->name('medicine.add');
         Route::put('/medicine/{id}', [medicamentController::class, 'editMedicine'])->name('medicine.edit');
+        Route::get('/editMedicine/{id}', [viewsController::class, 'editMedicineView'])->name('medicine.edit.view');
         Route::delete('/medicine/{id}', [medicamentController::class, 'deleteMedicine'])->name('medicine.delete');
 
 
