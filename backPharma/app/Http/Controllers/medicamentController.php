@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stock;
+use App\Models\Category;
 use App\Models\Medicine;
 use App\Models\Pharmacie;
 use Illuminate\Http\Request;
@@ -118,4 +119,22 @@ class MedicamentController extends Controller
         }
         return redirect()->back()->with('success', "Médicament supprimé avec succès");
     }
+
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+    
+        if ($query == null) {
+            return redirect()->route('medicineList');
+        }
+    
+        $categories = Category::all();
+        $me = Auth::user();
+    
+        $medicines = Medicine::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($query) . '%'])->get();
+    
+        return view('Guest.medicineList', compact('medicines', 'categories'));
+    }
+    
 }
