@@ -105,12 +105,12 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-bottom: 60px;margin-top:50px">
+        <div class="row" style="margin-bottom: 60px;margin-top:50px; ">
             <div class="col">
                 <div class="page-content page-container" id="page-content">
                     <div class="d-flex">
-                        <div class="col-lg-4 grid-margin stretch-card">
-                            <div class="card">
+                        <div class="grid-margin stretch-card" style="width: 33%; margin:0 5px">
+                            <div class="card w-100">
                                 <div class="card-body">
                                     <h4 class="card-title">All Users</h4>
                                     <p class="card-description">
@@ -163,8 +163,8 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-4 grid-margin stretch-card">
-                            <div class="card">
+                        <div class="grid-margin stretch-card"  style="width: 33%;margin:0 5px">
+                            <div class="card w-100">
                                 <div class="card-body">
                                     <h4 class="card-title">All Pharmacies</h4>
                                     <p class="card-description">
@@ -206,8 +206,8 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-4 grid-margin stretch-card">
-                            <div class="card">
+                        <div class="grid-margin stretch-card"  style="width: 33%;margin:0 5px">
+                            <div class="card w-100">
                                 <div class="card-body">
                                     <h4 class="card-title">All Categories</h4>
                                     <p class="card-description">
@@ -250,9 +250,9 @@
                                                 <!-- Add more rows if needed -->
                                             </tbody>
                                         </table>
-                                    </div>
+                                        </div>                                
+                                        {{ $categories->links('pagination::bootstrap-4') }}
                                 </div>
-                                {{ $categories->links('pagination::bootstrap-4') }}
                             </div>
                         </div>
                     </div>
