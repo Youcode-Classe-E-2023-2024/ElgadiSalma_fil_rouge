@@ -23,23 +23,43 @@
                                         <option value="{{ $medicine->id }}">{{ $medicine->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('commandes.0.medicament_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+                            
                             <div class="form-group">
                                 <label for="number_0">Nombre</label>
                                 <input type="number" name="commandes[0][number]" id="number_0" class="form-control" min="1">
+                                @error('commandes.0.number')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+                            
                             <div class="form-group">
                                 <label for="dateExpiration_0">Date d'expiration</label>
                                 <input type="date" name="commandes[0][dateExpiration]" id="dateExpiration_0" class="form-control">
+                                @error('commandes.0.dateExpiration')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+                            
                             <div class="form-group">
                                 <label for="dateDepart_0">Date de départ</label>
                                 <input type="date" name="commandes[0][dateDepart]" id="dateDepart_0" class="form-control">
+                                @error('commandes.0.dateDepart')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+                            
                             <div class="form-group">
                                 <label for="dateArrive_0">Date d'arrivée</label>
                                 <input type="date" name="commandes[0][dateArrive]" id="dateArrive_0" class="form-control">
+                                @error('commandes.0.dateArrive')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+                            
                         </div>
 
                         <div id="newContainer"></div>
@@ -99,4 +119,25 @@
             });
         });
     </script>
+
+    
+<script>
+    let error = "{{ session('error') }}";
+    let success = "{{ session('success') }}";
+
+    if (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: error
+        });
+    } else if (success) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Succès',
+            text: success
+        });
+    }
+</script>
+
 @endsection

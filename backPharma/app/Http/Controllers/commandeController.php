@@ -18,7 +18,21 @@ class CommandeController extends Controller
             'commandes.*.dateExpiration' => 'required|date_format:Y-m-d|after_or_equal:' . now()->format('Y-m-d'),
             'commandes.*.dateDepart' => 'required|date_format:Y-m-d',
             'commandes.*.dateArrive' => 'required|date_format:Y-m-d|after_or_equal:dateDepart|after_or_equal:' . now()->format('Y-m-d'),
+        ], [
+            'commandes.*.medicament_id.required' => 'Le champ médicament est requis.',
+            'commandes.*.medicament_id.integer' => 'Le champ médicament doit être un entier.',
+            'commandes.*.number.required' => 'Le champ nombre est requis.',
+            'commandes.*.number.integer' => 'Le champ nombre doit être un entier.',
+            'commandes.*.dateExpiration.required' => 'Le champ date d\'expiration est requis.',
+            'commandes.*.dateExpiration.date_format' => 'Le champ date d\'expiration doit être au format Y-m-d.',
+            'commandes.*.dateExpiration.after_or_equal' => 'Le champ date d\'expiration doit être postérieur ou égal à aujourd\'hui.',
+            'commandes.*.dateDepart.required' => 'Le champ date de départ est requis.',
+            'commandes.*.dateDepart.date_format' => 'Le champ date de départ doit être au format Y-m-d.',
+            'commandes.*.dateArrive.required' => 'Le champ date d\'arrivée est requis.',
+            'commandes.*.dateArrive.date_format' => 'Le champ date d\'arrivée doit être au format Y-m-d.',
+            'commandes.*.dateArrive.after_or_equal' => 'Le champ date d\'arrivée doit être postérieur ou égal à la date de départ et à aujourd\'hui.',
         ]);
+        
     
         $user = Auth::user();
     
