@@ -56,4 +56,22 @@
         </div>
     </div>
 
+    <script>
+        let error = "{{ session('error') }}";
+        let success = "{{ session('success') }}";
+    
+        if (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: error
+            });
+        } else if (success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: success
+            });
+        }
+    </script>
 @endsection
