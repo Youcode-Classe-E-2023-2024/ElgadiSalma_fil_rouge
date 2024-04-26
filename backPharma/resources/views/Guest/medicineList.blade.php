@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="heading">
-                            <h1>OUR <span>DEPARTMENTS</span></h1>
+                            <h1>OUR <span>MEDICINES</span></h1>
                         </div>
                     </div>
                 </div>

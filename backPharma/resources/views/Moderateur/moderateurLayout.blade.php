@@ -634,7 +634,9 @@
                             <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span>
                         </a>
                         <ul class="treeview-menu">
+                            @if ($me->role_id == '2')
                             <li><a href="/addUser">AddUser</a></li>
+                            @endif
                             <li><a href="/commande">addCommande</a></li>
 
                         </ul>

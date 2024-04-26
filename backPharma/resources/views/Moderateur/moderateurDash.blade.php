@@ -1,24 +1,27 @@
 @extends('Moderateur.moderateurLayout')
 @section('moderateurContent')
-<div class="content-header d-flex justify-content-between">
-    <h1>Dashboard </h1>
-    <ol class="">
-        <form action="{{ route('addToStock')}}" method="POST">
-        @csrf
-        <button class="botonaa" type="submit">
-            <strong>Add To Stock</strong>
-            <div id="container-stars">
-              <div id="stars"></div>
-            </div>
-          
-            <div id="glow">
-              <div class="circle"></div>
-              <div class="circle"></div>
-            </div>
-          </button>
-        </form>
-    </ol>
-</div>
+    <div class="content-header d-flex justify-content-between">
+        <h1>Dashboard </h1>
+        @if ($me->role_id == '2')
+            <ol class="">
+                <form action="{{ route('addToStock') }}" method="POST">
+                    @csrf
+                    <button class="botonaa" type="submit">
+                        <strong>Add To Stock</strong>
+                        <div id="container-stars">
+                            <div id="stars"></div>
+                        </div>
+
+                        <div id="glow">
+                            <div class="circle"></div>
+                            <div class="circle"></div>
+                        </div>
+                    </button>
+                </form>
+            </ol>
+        @endif
+
+    </div>
 
 
     <!-- Main content -->
@@ -189,10 +192,12 @@
                                                     style="background: none; border: none; color:rgb(102, 107, 111)" />
                                             </span>
                                         </div>
+
                                         <div class="d-flex justify-content-around p-1 gap-5">
-                                            <button type="submit" class="buttonEdit">
-                                                <span>Edit</span>
-                                            </button>
+                                            @if ($me->role_id == '2')
+                                                <button type="submit" class="buttonEdit">
+                                                    <span>Edit</span>
+                                                </button>
                                     </form>
                                     <form action="{{ route('user.delete', ['id' => $employee->id]) }}" method="POST">
                                         @csrf
@@ -201,6 +206,8 @@
                                             <span>Delete</span>
                                         </button>
                                     </form>
+                            @endif
+
                     </div>
 
 
@@ -213,13 +220,14 @@
                 <div class="mt-3">
 
                     <div class="box box-widget widget-user-2">
-                        <div class="widget-user-header"  style="background-color: #8bcbba">
+                        <div class="widget-user-header" style="background-color: #8bcbba">
                             <h3> Commandes suggestées ({{ $data['totalCommande'] }})</h3>
                         </div>
                         <ul class="products-list product-list-in-box">
                             @foreach ($commandes as $commande)
                                 <li class="item">
-                                    <form action="{{ route('commande.approuve', ['id' => $commande->id]) }}" method="POST">
+                                    <form action="{{ route('commande.approuve', ['id' => $commande->id]) }}"
+                                        method="POST">
                                         @csrf
                                         @method('put')
                                         <div class="product-img"> <img
@@ -227,26 +235,35 @@
                                                 alt="Product Image">
                                         </div>
                                         <div class="product-info w-9">
-                                            
-                                            <h5 class="product-title"  style="background: none; border: none; color:rgb(21, 64, 94)"> {{ $commande->medicine->name }}
+
+                                            <h5 class="product-title"
+                                                style="background: none; border: none; color:rgb(21, 64, 94)">
+                                                {{ $commande->medicine->name }}
                                             </h5>
                                             <span class="product-description d-flex ">
-                                                <h6 style="background: none; border: none; color:rgb(102, 107, 111)">{{ $commande->number }} pièces</h6>
-                                                <h6 style="background: none; border: none; color:rgb(102, 107, 111); padding-left:7rem">{{ $commande->number * $commande->medicine->price }} DH</h6>
+                                                <h6 style="background: none; border: none; color:rgb(102, 107, 111)">
+                                                    {{ $commande->number }} pièces</h6>
+                                                <h6
+                                                    style="background: none; border: none; color:rgb(102, 107, 111); padding-left:7rem">
+                                                    {{ $commande->number * $commande->medicine->price }} DH</h6>
                                             </span>
                                         </div>
                                         <div class="d-flex justify-content-around p-1 gap-5">
-                                            <button type="submit" class="buttonEdit">
-                                                <span>Approuve</span>
-                                            </button>
+                                            @if ($me->role_id == '2')
+                                                <button type="submit" class="buttonEdit">
+                                                    <span>Approuve</span>
+                                                </button>
                                     </form>
-                                    <form action="{{ route('commande.delete', ['id' => $commande->id]) }}" method="POST">
+                                    <form action="{{ route('commande.delete', ['id' => $commande->id]) }}"
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="buttonDelete">
                                             <span>Decline</span>
                                         </button>
                                     </form>
+                            @endif
+
                     </div>
 
 

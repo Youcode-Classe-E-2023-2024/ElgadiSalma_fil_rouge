@@ -166,7 +166,6 @@ Route::middleware(['auth.check'])->group(function () {
 
         Route::get('/commande', [viewsController::class, 'addCommandeView'])->name('addCommandeView');
 
-        Route::get('/addUser', [viewsController::class, 'addUserView'])->name('addUserView');
 
 
         /*
@@ -201,6 +200,8 @@ Route::middleware(['auth.check'])->group(function () {
 
         Route::post('/pharmaInfos', [pharmaController::class, 'addPharma'])->name('pharma.add');
 
+
+        Route::get('/addUser', [viewsController::class, 'addUserView'])->name('addUserView');
 
 
         /*
