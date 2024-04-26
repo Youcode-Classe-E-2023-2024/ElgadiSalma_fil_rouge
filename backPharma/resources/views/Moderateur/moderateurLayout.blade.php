@@ -602,11 +602,11 @@
             <div class="sidebar">
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
-                    <div class="image text-center"><img src="assets-dashboard-utilisateur/img/img1.jpg"
+                    <div class="image text-center"><img src="{{ asset('storage/images/users/' . $me->photo) }}"
                             class="img-circle" alt="User Image">
                     </div>
                     <div class="info">
-                        <p>Alexander Pierce</p>
+                        <p>{{ $me->name}}</p>
                         <a href="#"><i class="fa fa-cog"></i></a> <a href="#"><i
                                 class="fa fa-envelope-o"></i></a> <a href="#"><i class="fa fa-power-off"></i></a>
                     </div>

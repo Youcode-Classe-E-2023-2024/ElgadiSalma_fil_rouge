@@ -50,5 +50,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+    public function pharmacy()
+    {
+        return $this->belongsTo(Pharmacie::class, 'pharmacie_id');
+    }
     
 }

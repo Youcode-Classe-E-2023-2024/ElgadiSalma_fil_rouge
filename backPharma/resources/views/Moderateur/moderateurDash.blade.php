@@ -123,14 +123,14 @@
                     <div class="w-100 m-3">
                         <div class="box box-widget widget-user">
                             <div class="widget-user-header " style="background-color: #8AA79F">
-                                <h3 class="widget-user-username">PharmaStock</h3>
-                                <h6 class="widget-user-desc">ElGadi Salma -> Founder &amp; CEO</h6>
+                                <h3 class="widget-user-username">{{ $pharmacy->name}}</h3>
+                                <h6 class="widget-user-desc">{{ $pharmacy->city->city}}</h6>
                             </div>
                             <div class="widget-user-image"> <img class="img-circle"
-                                    src="{{ asset('storage/images/users/' . $me->photo) }}" alt="User Avatar"> </div>
+                                    src="{{ asset('storage/images/pharmacies/' . $pharmacy->logo) }}" alt="User Avatar"> </div>
                             <div class="box-footer">
                                 <div class="text-center">
-                                    <p> A small river named Duden flows by their place and with the necessary.</p>
+                                    <p> {{ $pharmacy->adresse }}</p>
                                     <a href="#" class="btn btn-facebook btn-rounded margin-bottom">Follow</a>
                                 </div>
                                 <div class="row margin-bottom">

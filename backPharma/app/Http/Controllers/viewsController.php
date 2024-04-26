@@ -103,6 +103,7 @@ class viewsController extends Controller
         $Pharmacies = Pharmacie::paginate(2, ['*'], 'pharmacies');
         $Medicines = Medicine::all();
         $me = Auth::user();
+        $pharmacy = $me->pharmacy;
         $role = Role::find($me->role_id);
         $data = [
             'totalMedicines' => Medicine::count(),
@@ -137,7 +138,8 @@ class viewsController extends Controller
             'stockStatistics' => $stockStatistics,
             'employees' => $employees,
             'capitale' => $capitale,
-            'commandes' => $commandes
+            'commandes' => $commandes,
+            'pharmacy' => $pharmacy
         ]);
     }
 
