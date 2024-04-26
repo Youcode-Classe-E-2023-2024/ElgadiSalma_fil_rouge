@@ -12,7 +12,10 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 @foreach ($categories as $category)
-                                    <li class="breadcrumb-item"><a href="{{ route('medicine.filter', ['id' => $category->id]) }}">{{ $category->name }}</a></li>
+                                    <li class="breadcrumb-item">
+                                        <a style="@if (Request::path() === 'medicament/' . $category->id) color: green; @endif"
+                                            href="{{ route('medicine.filter', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
                             </ol>
                         </nav>
