@@ -20,6 +20,17 @@ class PharmaController extends Controller
             'capitale' => 'required',
             'city_id' => 'required|integer',
             'adresse' => 'required|string|max:155',
+        ], [
+            'name.required' => 'Veuillez entrer le nom de la pharmacie.',
+            'name.string' => 'Le nom de la pharmacie doit être une chaîne de caractères.',
+            'name.max' => 'Le nom de la pharmacie ne peut pas dépasser :max caractères.',
+            'logo.required' => 'Veuillez choisir un logo pour la pharmacie.',
+            'capitale.required' => 'Veuillez entrer la capitale de la pharmacie.',
+            'city_id.required' => 'Veuillez sélectionner une ville pour la pharmacie.',
+            'city_id.integer' => 'L\'identifiant de la ville doit être un nombre entier.',
+            'adresse.required' => 'Veuillez entrer l\'adresse de la pharmacie.',
+            'adresse.string' => 'L\'adresse de la pharmacie doit être une chaîne de caractères.',
+            'adresse.max' => 'L\'adresse de la pharmacie ne peut pas dépasser :max caractères.',
         ]);
         
         $user = Auth::user();

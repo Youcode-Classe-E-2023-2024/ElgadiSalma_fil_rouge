@@ -194,39 +194,50 @@
                                     <option value="{{ $city->id }}" style="color: #000000;">{{ $city->name }}</option>
                                 @endforeach
                             </select>
-                            
+                            @error('city_id')
+                                <p style="color: red;">{{ $message }}</p>
+                            @enderror
                         </div>
                         <hr>
                         <div>
                             <span>Adresse de la pharmacie :</span>
-                            <input type="text" placeholder="Adresse" name="adresse" value="221B Baker Street, W1U 8ED"
-                                style="background: none;
-                        border: none; width: 80%; height:2rem;">
+                            <input type="text" placeholder="Adresse" name="adresse" value="{{ old('adresse') }}"
+                                style="background: none; border: none; width: 80%; height:2rem;">
+                            @error('adresse')
+                                <p style="color: red;">{{ $message }}</p>
+                            @enderror
                         </div>
                         <hr>
                         <div>
                             <span>Nom de la pharmacie :</span>
-                            <input type="text" name="name" placeholder="Adresse" value="PharmaStock"
+                            <input type="text" name="name" placeholder="Adresse" value="{{ old('name') }}"
                                 style="background: none;border: none; width: 80%; height:2rem;">
+                            @error('name')
+                                <p style="color: red;">{{ $message }}</p>
+                            @enderror
                         </div>
                         <hr>
                         <div>
                             <span>Capitale de la pharmacie :</span>
-                            <input type="number" name="capitale" placeholder="capitale" value="PharmaStock"
+                            <input type="number" name="capitale" placeholder="capitale" value="{{ old('capitale') }}"
                                 style="background: none;border: none; width: 80%; height:2rem;">
+                            @error('capitale')
+                                <p style="color: red;">{{ $message }}</p>
+                            @enderror
                         </div>
                         <hr>
                         <div class="promo">
                             <span>LoGo de la pharmacie :</span>
-
                             <input type="file" name="logo" placeholder="Enter votre logo" class="input_field d-flex"
                                 style="width: 95%;">
-
+                            @error('logo')
+                                <p style="color: red;">{{ $message }}</p>
+                            @enderror
                         </div>
                         <hr>
-
                     </div>
                 </div>
+                
         </div>
 
         <div class="card checkout">
