@@ -57,9 +57,11 @@
                                         <div class="dropdown-menu">
 
                                             <a class="dropdown-item" href="#"><img
-                                                    src="{{ asset('assets/image/language-2.jpg') }}" alt="lan"> FRA</a>
+                                                    src="{{ asset('assets/image/language-2.jpg') }}" alt="lan">
+                                                FRA</a>
                                             <a class="dropdown-item" href="#"><img
-                                                    src="{{ asset('assets/image/language-1.jpg') }}" alt="lan">GRE</a>
+                                                    src="{{ asset('assets/image/language-1.jpg') }}"
+                                                    alt="lan">GRE</a>
                                         </div>
                                     </div>
                                 </div>
@@ -73,26 +75,22 @@
                     <a class="navbar-brand" href="index.html">
                         <img src="{{ asset('assets/image/pharma_logo.png') }}" style="width: 50px" class="img-fluid"
                             alt="img">
-                            <p>Pharma<span>Stock</span></p>
-                        </a>
+                        <p>Pharma<span>Stock</span></p>
+                    </a>
                     <button class="navbar-toggler toggler-spring"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse">
                         <ul class="navbar-nav navbar-mobile ml-auto mr-auto">
-                            <li class="nav-item dropdown @if(Request::url() === 'http://127.0.0.1:8000') activee @endif">
+                            <li class="nav-item dropdown @if (Request::url() === 'http://127.0.0.1:8000') activee @endif">
                                 <a class="nav-link link_hd" href="/"> Home </a>
                             </li>
 
-                            <li class="nav-item dropdown @if(Request::url() === 'http://127.0.0.1:8000/medicament') activee @endif">
+                            <li class="nav-item dropdown @if (Request::url() === 'http://127.0.0.1:8000/medicament') activee @endif">
                                 <a class="nav-link link_hd" href="/medicament"> Médicament </a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link link_hd" href="#"> Pages </a>
-                                <ul class="navbar-nav submenu">
-                                    <li class="nav-item"><a class="nav-link" href="/about-us">à Propos de nous</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="contact.html">Contactez-nouz</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="our-doctors.html">Notre Pharmacies</a></li>
-                                </ul>
+                            <li class="nav-item dropdown @if (Request::url() === 'http://127.0.0.1:8000/about-us') activee @endif">
+                                <a class="nav-link  link_hd" href="/about-us">à Propos de nous</a>
                             </li>
+
 
                         </ul>
                         <ul class="navbar-nav navbar-mobile right-nav ml-auto ">
@@ -219,7 +217,7 @@
                 <div class="row clearfix">
                     <div class="col-lg-12">
                         <div class="left">
-                            <p>© 2019 <span>Meditex.</span> All rights reserved.</p>
+                            <p>© 2023 <span>PharmaStock.</span> All rights reserved.</p>
                         </div>
                         <div class="right">
                             <ul>
