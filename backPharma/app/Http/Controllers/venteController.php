@@ -7,6 +7,7 @@ use App\Models\Capitale;
 use App\Models\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class VenteController extends Controller
 {
@@ -44,7 +45,7 @@ class VenteController extends Controller
     
                 return redirect()->back()->with('success', "Médicament vendu avec succès. Prix total : $prixTotal");
             } else {
-                return response()->json(['error' => 'Stock insuffisant']);
+                return redirect()->back()->with('error', 'Stock insuffisant');
             }
         } else {
             $editedStock = Stock::where('pharmacie_id', $user->pharmacie_id)

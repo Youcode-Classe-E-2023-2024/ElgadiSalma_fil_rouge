@@ -1,6 +1,6 @@
 @extends('Moderateur.moderateurLayout')
 @section('moderateurContent')
-    <div class="content-header sty-one">
+    <div class="content-header d-flex sty-one">
         <h1>Ventes</h1>
         <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
@@ -8,29 +8,29 @@
         </ol>
     </div>
 
-    
-  <!-----------------breadcrumb------------------------>
-  <section class="ban-bread-crumb">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        @foreach ($categories as $category)
-                            <li class="breadcrumb-item">
-                                <a style="@if (Request::path() === 'venteMedicines/' . $category->id) color: #15616D; @endif"
-                                    href="{{ route('filter.user', ['id' => $category->id]) }}">{{ $category->name }}</a>
-                            </li>
-                        @endforeach
-                    </ol>
-                </nav>
+
+    <!-----------------breadcrumb------------------------>
+    <section class="ban-bread-crumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @foreach ($categories as $category)
+                                <li class="breadcrumb-item">
+                                    <a style="@if (Request::path() === 'venteMedicines/' . $category->id) color: #15616D; @endif"
+                                        href="{{ route('filter.user', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                </li>
+                            @endforeach
+                        </ol>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
 
-</section>
+    </section>
 
-<!-----------------breadcrumb------------------------>
+    <!-----------------breadcrumb------------------------>
 
 
     <div class="cards">
@@ -92,4 +92,24 @@
             </div>
         @endforeach
     </div>
+
+    <script>
+        let error = "{{ session('error') }}";
+        let success = "{{ session('success') }}";
+    
+        if (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur',
+                text: error
+            });
+        } else if (success) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Succès',
+                text: success
+            });
+        }
+    </script>
+    
 @endsection
