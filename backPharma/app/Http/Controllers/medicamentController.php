@@ -23,6 +23,16 @@ class MedicamentController extends Controller
             'category' => 'required|integer',
             'expiration' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        ], [
+            'name.required' => 'Veuillez entrer le nom.',
+            'description.required' => 'Veuillez entrer la description.',
+            'price.required' => 'Veuillez entrer le prix.',
+            'price.integer' => 'Le prix doit être un nombre entier.',
+            'category.required' => 'Veuillez sélectionner une catégorie.',
+            'category.integer' => 'La catégorie doit être un nombre entier.',
+            'expiration.required' => 'Veuillez sélectionner une durée d\'expiration.',
+            'image.image' => 'Le fichier doit être une image.',
+            'image.mimes' => 'Le fichier doit être de type jpeg, png, jpg, gif ou svg.',
         ]);
 
         $image = $request->file('image');
