@@ -18,7 +18,7 @@ use App\Http\Controllers\medicamentController;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/',[viewsController::class, 'homePage'])->name('homePage');
+Route::get('/', [viewsController::class, 'homePage'])->name('homePage');
 
 Route::get('/medicament', [viewsController::class, 'medicineListe'])->name('medicineList');
 
@@ -91,8 +91,12 @@ Route::middleware(['auth.check'])->group(function () {
 
         Route::get('/medicineList', [viewsController::class, 'medicineListAdmin'])->name('medicineListAdmin');
 
+        Route::post('/searchMedicines', [medicamentController::class, 'adminSearch'])->name('searchAdminMedicine');
 
-        
+        // filter
+        Route::get('/medicineList/{id}', [medicamentController::class, 'filterMedicineAdmin'])->name('filter.admin');
+
+
 
         /*
         |--------------------------------------------------------------------------
@@ -113,14 +117,11 @@ Route::middleware(['auth.check'])->group(function () {
         Route::post('/category', [categoryController::class, 'addCategory'])->name('category.add');
         Route::put('/category/{id}', [categoryController::class, 'editCategory'])->name('category.edit');
         Route::delete('/category/{id}', [categoryController::class, 'deleteCategory'])->name('category.delete');
-
-
-
     });
 
 
     Route::middleware('role:Administrateur|Moderateur')->group(function () {
-        
+
         /*
         |--------------------------------------------------------------------------
         | add to stock
@@ -136,7 +137,6 @@ Route::middleware(['auth.check'])->group(function () {
         Route::post('/users', [userController::class, 'addUser'])->name('user.add');
         Route::put('/users/{id}', [userController::class, 'editUser'])->name('user.edit');
         Route::delete('/users/{id}', [userController::class, 'deleteUser'])->name('user.delete');
-
     });
 
 
@@ -174,15 +174,13 @@ Route::middleware(['auth.check'])->group(function () {
         |--------------------------------------------------------------------------
         */
         Route::put('/buyMedicine/{id}', [venteController::class, 'buyMedicine'])->name('medicine.buy');
-
-        
     });
 
-    
+
 
 
     Route::middleware('role:Moderateur')->group(function () {
-        
+
         /*
         |--------------------------------------------------------------------------
         | pharma infos
@@ -193,16 +191,12 @@ Route::middleware(['auth.check'])->group(function () {
         Route::post('/pharmaInfos', [pharmaController::class, 'addPharma'])->name('pharma.add');
 
 
-        
+
         /*
         |--------------------------------------------------------------------------
         | approuve or decline commande
         |--------------------------------------------------------------------------
         */
         Route::put('/commande/{id}', [commandeController::class, 'approuveCommande'])->name('commande.approuve');
-
-
-
     });
-
 });

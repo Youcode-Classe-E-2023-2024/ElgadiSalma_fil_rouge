@@ -1,6 +1,28 @@
 @extends('Admin.adminLayout')
 @section('adminContent')
 
+  <!-----------------breadcrumb------------------------>
+  <section class="ban-bread-crumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        @foreach ($categories as $category)
+                            <li class="breadcrumb-item">
+                                <a style="@if (Request::path() === 'medicineList/' . $category->id) color: #15616D; @endif"
+                                    href="{{ route('filter.admin', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-----------------breadcrumb------------------------>
 
     <div class="cards">
         @foreach ($medicines as $medicine)

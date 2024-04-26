@@ -592,9 +592,10 @@
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar blue-bg navbar-static-top">
                 <div class="pull-left search-box">
-                    <form action="#" method="get" class="search-form">
+                    <form action="{{ route('searchAdminMedicine') }}" method="post" class="search-form">
+                        @csrf
                         <div class="input-group">
-                            <input name="search" class="form-control" placeholder="Search..." type="text">
+                            <input name="query" class="form-control" placeholder="Search..." type="text">
                             <span class="input-group-btn">
                                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
                                         class="fa fa-search"></i> </button>

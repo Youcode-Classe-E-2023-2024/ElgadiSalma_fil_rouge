@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Stock;
 use App\Models\Category;
 use App\Models\Medicine;
@@ -144,4 +145,33 @@ class MedicamentController extends Controller
         return view('Guest.medicineList', compact('medicines', 'categories'));
     }
     
+
+    public function adminSearch(Request $request)
+    {
+        $query = $request->input('query');
+    
+        if ($query == null) {
+            return redirect()->route('medicineListAdmin');
+        }
+    
+        $categories = Category::all();
+    
+        $medicines = Medicine::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($query) . '%'])->get();
+
+        $me = Auth::user();
+        $role = Role::find($me->role_id);
+    
+        return view('Admin.listAdmin', compact('medicines', 'categories','me','role'));
+    }
+
+    public function filterMedicineAdmin($id)
+    {
+        $medicines = Medicine::where('category_id', $id)->get();
+        $categories = Category::all();
+
+        $me = Auth::user();
+        $role = Role::find($me->role_id);
+    
+        return view('Admin.listAdmin', compact('medicines', 'categories','me','role'));
+    }
 }
