@@ -1,12 +1,12 @@
 @extends('Moderateur.moderateurLayout')
 @section('moderateurContent')
-<div class="content-header sty-one">
-    <h1>Ventes</h1>
-    <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><i class="fa fa-angle-right"></i> Dashboard </li>
-    </ol>
-</div>
+    <div class="content-header sty-one">
+        <h1>Ventes</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><i class="fa fa-angle-right"></i> Dashboard </li>
+        </ol>
+    </div>
 
     <div class="cards">
         @foreach ($medicines as $medicine)
@@ -15,26 +15,27 @@
                     <div class="back">
                         <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}" alt="test"
                             style="height: 100%">
-
                     </div>
                     <div class="front">
-
                         <div class="img">
                             <img src="{{ asset('storage/images/medicines/' . $medicine->image) }}" alt="test"
-                                style="height: 100%; filter: blur(15px);                ;
-                ">
+                                style="height: 100%; filter: blur(15px);">
                         </div>
-
                         <div class="front-content">
                             <small class="badge">{{ $medicine->category->name }}</small>
+                            <div class="d-flex justify-content-center">
+                                <h3
+                                    style="text-shadow: 0 0 5px #15616D, 0 0 10px #15616D, 0 0 20px #15616D, 0 0 30px #15616D, 0 0 40px #15616D, 0 0 55px #15616D, 0 0 75px #15616D;">
+                                    {{ $stockTotals[$medicine->id] ?? 0 }}</h3>
+                            </div>
                             <div class="description">
                                 <div class="title">
                                     <p class="title">
                                         <strong>{{ $medicine->name }}</strong>
                                     </p>
                                     <p>{{ $medicine->price }} MAD</p>
-                                    <a href="medicine/{{ $medicine->id }}"> <svg fill-rule="nonzero" height="15px" width="15px"
-                                            viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    <a href="medicine/{{ $medicine->id }}"> <svg fill-rule="nonzero" height="15px"
+                                            width="15px" viewBox="0,0,256,256" xmlns:xlink="http://www.w3.org/1999/xlink"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <g style="mix-blend-mode: normal" text-anchor="none" font-size="none"
                                                 font-weight="none" font-family="none" stroke-dashoffset="0"
@@ -59,8 +60,6 @@
                                             style="background-color: red">
                                     </div>
                                 </form>
-
-
                             </div>
                         </div>
                     </div>
@@ -68,31 +67,4 @@
             </div>
         @endforeach
     </div>
-
-    {{-- <script>
-    $(document).ready(function() {
-        $('#buyBtn, #respondBtn').click(function() {
-            var formData = $('#buyForm').serialize();
-
-            $.ajax({
-                url: $('#buyForm').attr('action'),
-                method: 'POST',
-                data: formData,
-                success: function(response) {
-                    // Check if response contains an error
-                    if (response.error) {
-                        // Display error message on the page
-                        alert(response.error);
-                    } else {
-                        // Success, do something else
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // Handle AJAX error
-                    console.error(error);
-                }
-            });
-        });
-    });
-</script> --}}
 @endsection

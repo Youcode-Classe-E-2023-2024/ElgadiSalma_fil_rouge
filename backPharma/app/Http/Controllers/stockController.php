@@ -41,4 +41,5 @@ class stockController extends Controller
 
         return redirect()->back()->with('success', "Médicament non trouvé");
     }
+
 }
