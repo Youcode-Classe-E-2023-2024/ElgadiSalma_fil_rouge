@@ -9,26 +9,26 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 
     <!-- v4.0.0-alpha.6 -->
-    <link rel="stylesheet" href="assets-dashboard-utilisateur/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard-utilisateur/bootstrap/css/bootstrap.min.css') }}">
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="assets-dashboard-utilisateur/css/style.css">
-    <link rel="stylesheet" href="assets-dashboard-utilisateur/css/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets-dashboard-utilisateur/css/et-line-font/et-line-font.css">
-    <link rel="stylesheet" href="assets-dashboard-utilisateur/css/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard-utilisateur/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard-utilisateur/css/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard-utilisateur/css/et-line-font/et-line-font.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-dashboard-utilisateur/css/themify-icons/themify-icons.css') }}">
 
     <!-- Include SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="{{ asset('https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css') }}">
 
     <!-- Include SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/npm/sweetalert2@11') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js') }}" defer></script>
+    <script src="{{ asset('https://cdn.jsdelivr.net/npm/chart.js') }}"></script>
+    <script src="{{ asset('https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js') }}"></script>
 
     <style>
         .botonaa {
@@ -560,9 +560,10 @@
                     <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
                 </ul>
                 <div class="pull-left search-box">
-                    <form action="#" method="get" class="search-form">
+                    <form action="{{ route('searchUserMedicine') }}" method="post" class="search-form">
+                        @csrf
                         <div class="input-group">
-                            <input name="search" class="form-control" placeholder="Search..." type="text">
+                            <input name="query" class="form-control" placeholder="Search..." type="text">
                             <span class="input-group-btn">
                                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
                                         class="fa fa-search"></i> </button>
@@ -663,20 +664,20 @@
             </footer> --}}
         </div>
         <!-- ./wrapper -->
-
         <!-- jQuery 3 -->
-        <script src="assets-dashboard-utilisateur/js/jquery.min.js"></script>
+        <script src="{{ asset('assets-dashboard-utilisateur/js/jquery.min.js') }}"></script>
 
         <!-- v4.0.0-alpha.6 -->
-        <script src="assets-dashboard-utilisateur/bootstrap/js/bootstrap.min.js"></script>
+        <script src="{{ asset('assets-dashboard-utilisateur/bootstrap/js/bootstrap.min.js') }}"></script>
 
         <!-- template -->
-        <script src="assets-dashboard-utilisateur/js/niche.js"></script>
+        <script src="{{ asset('assets-dashboard-utilisateur/js/niche.js') }}"></script>
 
         <!-- Morris JavaScript -->
-        <script src="assets-dashboard-utilisateur/plugins/raphael/raphael-min.js"></script>
-        <script src="assets-dashboard-utilisateur/plugins/morris/morris.js"></script>
-        <script src="assets-dashboard-utilisateur/plugins/functions/morris-init.js"></script>
+        <script src="{{ asset('assets-dashboard-utilisateur/plugins/raphael/raphael-min.js') }}"></script>
+        <script src="{{ asset('assets-dashboard-utilisateur/plugins/morris/morris.js') }}"></script>
+        <script src="{{ asset('assets-dashboard-utilisateur/plugins/functions/morris-init.js') }}"></script>
+
 </body>
 
 </html>

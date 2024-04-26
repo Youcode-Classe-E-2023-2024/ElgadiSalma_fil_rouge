@@ -137,10 +137,21 @@ Route::middleware(['auth.check'])->group(function () {
         Route::post('/users', [userController::class, 'addUser'])->name('user.add');
         Route::put('/users/{id}', [userController::class, 'editUser'])->name('user.edit');
         Route::delete('/users/{id}', [userController::class, 'deleteUser'])->name('user.delete');
+
     });
 
 
     Route::middleware('role:Utilisateur|Moderateur')->group(function () {
+        
+        /*
+        |--------------------------------------------------------------------------
+        | Search and Filter
+        |--------------------------------------------------------------------------
+        */
+        Route::post('/searchMedicament', [medicamentController::class, 'userSearch'])->name('searchUserMedicine');
+
+        Route::get('/venteMedicines/{id}', [medicamentController::class, 'filterMedicineUser'])->name('filter.user');
+
 
         /*
         |--------------------------------------------------------------------------

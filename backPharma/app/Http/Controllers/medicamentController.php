@@ -174,4 +174,34 @@ class MedicamentController extends Controller
     
         return view('Admin.listAdmin', compact('medicines', 'categories','me','role'));
     }
+
+    public function userSearch(Request $request)
+    {
+        $query = $request->input('query');
+    
+        if ($query == null) {
+            return redirect()->route('venteView');
+        }
+    
+        $categories = Category::all();
+    
+        $medicines = Medicine::whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($query) . '%'])->get();
+
+        $me = Auth::user();
+        $role = Role::find($me->role_id);
+    
+        return view('Moderateur.medicineUser', compact('medicines', 'categories','me','role'));
+    }
+    
+    public function filterMedicineUser($id)
+    {
+        $medicines = Medicine::where('category_id', $id)->get();
+        $categories = Category::all();
+
+        $me = Auth::user();
+        $role = Role::find($me->role_id);
+    
+        return view('Moderateur.medicineUser', compact('medicines', 'categories','me','role'));
+    }
+
 }

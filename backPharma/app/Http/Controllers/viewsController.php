@@ -187,12 +187,14 @@ class viewsController extends Controller
 
         // dd($stockTotals);
 
+        $categories = Category::all();
 
         return view('Moderateur.medicineUser', [
             'me' => $me,
             'role' => $role,
             'medicines' => $medicines,
             'stockTotals' => $stockTotals,
+            'categories' => $categories
         ]);
     }
 
