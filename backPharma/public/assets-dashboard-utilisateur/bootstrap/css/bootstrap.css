@@ -3926,6 +3926,10 @@ tbody.collapse.show {
 }
 
 .navbar-brand {
+  display: flex; 
+  flex-direction:row; 
+  align-items: center;
+  justify-content: center;
   display: inline-block;
   padding-top: .25rem;
   padding-bottom: .25rem;

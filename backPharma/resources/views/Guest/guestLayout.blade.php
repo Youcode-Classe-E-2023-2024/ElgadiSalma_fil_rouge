@@ -72,10 +72,10 @@
             </div>
             <div class="navbar navbar-expand-lg bsnav bsnav-sticky bsnav-sticky-slide">
                 <div class="container">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand d-flex" href="/">
                         <img src="{{ asset('assets/image/pharma_logo.png') }}" style="width: 50px" class="img-fluid"
                             alt="img">
-                        <p>Pharma<span>Stock</span></p>
+                        <p style="padding: 11px 5px; color:darkslategrey">Pharma<span>Stock</span></p>
                     </a>
                     <button class="navbar-toggler toggler-spring"><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse">

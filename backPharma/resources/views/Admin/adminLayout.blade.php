@@ -4,11 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Niche Admin - Powerful Bootstrap 4 Dashboard and Admin Template</title>
-    <!-- Tell the browser to be responsive to screen width -->
+    <title>PharmaStock</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 
-    <!-- v4.0.0-alpha.6 -->
     <link rel="stylesheet" href="{{ asset('assets-dashboard/bootstrap/css/bootstrap.min.css') }}">
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js" defer></script>
@@ -566,10 +564,8 @@
             transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
         }
     </style>
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
-    <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets-dashboard/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-dashboard/css/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-dashboard/css/et-line-font/et-line-font.css') }}">
@@ -584,12 +580,12 @@
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
         <header class="main-header">
-            <!-- Logo -->
-            <a href="index.html" class="logo blue-bg">
-                <span class="logo-mini"><img src="assets-dashboard/img/logo-n.png" alt=""></span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><img src="assets-dashboard/img/logo.png" alt=""></span> </a>
-            <!-- Header Navbar: style can be found in header.less -->
+            <a class="logo blue-bg navbar-brand d-flex" href="index.html">
+                <img src="{{ asset('assets/image/pharma_logo.png') }}" class="img-fluid"
+                    alt="img">
+                <p style="padding: 15px 5px;">Pharma<span>Stock</span></p>
+            </a>
+           
             <nav class="navbar blue-bg navbar-static-top">
                 <div class="pull-left search-box">
                     <form action="{{ route('searchAdminMedicine') }}" method="post" class="search-form">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Niche Admin - Powerful Bootstrap 4 Dashboard and Admin Template</title>
+    <title>PharmaStock</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 
@@ -551,10 +551,12 @@
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
         <header class="main-header">
-            <!-- Logo -->
-            <a href="index.html" class="logo blue-bg">
-                <span class="logo-mini"><img src="assets-dashboard-utilisateur/img/logo-n.png" alt=""></span>
-                <span class="logo-lg"><img src="assets-dashboard-utilisateur/img/logo.png" alt=""></span> </a>
+            <a class="logo blue-bg navbar-brand d-flex" href="index.html">
+                <img src="{{ asset('assets/image/pharma_logo.png') }}" class="img-fluid"
+                    alt="img">
+                <p style="padding:3px">Pharma<span>Stock</span></p>
+            </a>
+           
             <nav class="navbar blue-bg navbar-static-top">
                 <ul class="nav navbar-nav pull-left">
                     <li><a class="sidebar-toggle" data-toggle="push-menu" href=""></a> </li>
